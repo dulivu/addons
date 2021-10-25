@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="search_booking" model="ir.ui.view">
+    <field name="name">booking.search</field>
+    <field name="model">sale.order.booking</field>
+    <field name="arch" type="xml">
+        <search string="Reservas">
+        	<field name="product_id" string="Servicio"/>
+            <field name="order_id" string="Expediente"/>
+            <filter string="Por entrar" name="checked_in" domain="[('state','in',['sale','done']), ('state_booking','=','booked')]" help="Ventas confirmadas con reservas por ingresar"/>
+            <filter string="Por salir" name="checked_out" domain="[('state','in',['sale','done']), ('state_booking','=','checked_in')]" help="Ventas confirmadas con reservas por salir"/>
+            <filter string="Sin validar" name="no_validate" domain="[('state','=','draft'), ('state_booking','=','booked')]" help="Reservas de ventas sin confirmar"/>
+            <separator/>
+            <filter string="Sin finalizar" name="no_done" domain="[('state','in',['sale']), ('state_booking','=','checked_out')]" help="Reservas cerradas, con la venta sin bloquear"/>
+            <separator/>
+            <filter string="Hoy" name="today" domain="[('check_in','&gt;=',time.strftime('%%Y-%%m-%%d'))]"/>
+            <filter string="Este mes" name="thismonth" domain="[('check_in','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+            <filter string="Este año" name="thisyear" domain="[('check_in','&gt;=',time.strftime('%%Y-01-01'))]"/>
+        </search>
+    </field>
+</record>
+
+<record id="tree_booking" model="ir.ui.view">
+    <field name="name">booking.tree</field>
+    <field name="model">sale.order.booking</field>
+    <field name="arch" type="xml">
+        <tree default_order="check_in">
+            <field name="product_id" string="Servicio"/>
+            <field name="check_in"/>
+            <field name="check_out"/>
+            <field name="order_id" string="Expediente"/>
+            <field name="state_booking"/>
+            <field name="state"/>
+        </tree>
+    </field>
+</record>
+
+<record id="view_booking_form" model="ir.ui.view">
+	<field name="name">Reservas</field>
+	<field name="model">sale.order.booking</field>
+	<field name="arch" type="xml">
+		<form string="Reserva">
+            <header>
+                <button name="do_return" type="object" class="btn-warning"
+                        attrs="{'invisible': [('state', '!=', 'sale')]}">
+                    <span>Devolver</span>
+                </button>
+
+                <button name="do_check_in" type="object" class="oe_highlight"
+                        attrs="{'invisible': ['|', ('state', '!=', 'sale'), ('state_booking', 'in', ['checked_in', 'checked_out'])]}">
+                    <span>Registrar ingreso</span>
+                </button>
+
+                <button name="do_check_out" type="object" class="oe_highlight"
+                        attrs="{'invisible': ['|', ('state', '!=', 'sale'), ('state_booking', 'in', ['booked', 'checked_out'])]}">>
+                    <span>Registrar salida</span>
+                </button>
+
+                <field name="state_booking" widget="statusbar"/>
+            </header>
+            <field name="state" invisible="1"/>
+            <field name="qty_invoiced" invisible="1"/>
+            <field name="currency_id" invisible="1"/>
+            <field name="product_uom_qty" invisible="1"/>
+            <field name="product_uom" invisible="1"/>
+            <field name="company_id" invisible="1"/>
+            <sheet>
+                <div class="oe_title">
+                    <h1>
+                        <field name="product_id"
+                               domain="[('type', '=', 'service'), ('uom_id', 'in', [%(product.product_uom_day)d, %(product.product_uom_hour)d])]"
+							   context="{'default_type': 'service', 'default_uom_id': %(product.product_uom_day)d}"/>
+                    </h1>
+                </div>
+                <group>
+                    <group string="Reserva">
+                        <field name="state" string="Estado del expediente" readonly="1"/>
+                        <field name="order_id"/>
+                        <field name="check_in"/>
+                        <field name="check_out"/>
+                    </group>
+                    <group string="Venta">
+                    	<field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+                        <field name="tax_id" widget="many2many_tags" domain="[('type_tax_use','=','sale'), ('company_id','=',company_id)]"/>
+                        <field name="price_subtotal" widget="monetary" groups="sale.group_show_price_subtotal" invisible="1"/>
+                        <field name="price_total" widget="monetary" groups="sale.group_show_price_total" invisible="1"/>
+                    </group>
+                </group>
+            </sheet>
+            <div class="oe_chatter">
+            	<field name="message_follower_ids" widget="mail_followers"/>
+            	<field name="message_ids" widget="mail_thread"/>
+            </div>
+        </form>
+	</field>
+</record>
+
+<record id="view_booking_calendar" model="ir.ui.view">
+    <field name="name">Reservas</field>
+    <field name="model">sale.order.booking</field>
+    <field name="arch" type="xml">
+        <calendar string="Reservas" mode="month" quick_add="False"
+            color="product_id" date_start="check_in" date_stop="check_out"
+            display=" [[order_id]] [product_id]">
+            <field name="order_id"/>
+            <field name="product_id"/>
+        </calendar>
+    </field>
+</record>
+
+<record model="ir.actions.act_window" id="action_booking">
+	<field name="name">Reservas</field>
+	<field name="res_model">sale.order.booking</field>
+	<field name="view_type">form</field>
+	<field name="view_mode">calendar,tree,form</field>
+    <field name="context">{'search_default_checked_in':1, 'search_default_checked_out':1}</field>
+    <field name="domain">[('state','!=','cancel')]</field>
+    <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+            Haga click para registrar una nueva reserva.
+        </p><p>
+
+        </p><p>
+
+        </p>
+    </field>
+</record>
+
+<menuitem id="menu_booking"
+    name="Reservas"
+    sequence="12"
+    action="action_booking"
+    parent="sales_team.menu_sales"/>
+
+</odoo>

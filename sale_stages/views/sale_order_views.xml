@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- equipo de ventas -->
+<record id="crm_team_view_form" model="ir.ui.view">
+	<field name="name">crm.team.form</field>
+	<field name="model">crm.team</field>
+	<field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+	<field name="arch" type="xml">
+		<xpath expr="//field[@name='user_id']" position="after">
+			<field name="alt_sequence"/>
+		</xpath>
+	</field>
+</record>
+
+<record id="sale.action_quotations_salesteams" model="ir.actions.act_window">
+	<field name="view_mode">kanban,tree,form,calendar,graph</field>
+</record>
+
+</odoo>

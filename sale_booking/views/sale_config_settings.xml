@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sales_config" model="ir.ui.view">
+		<field name="name">sale settings</field>
+		<field name="model">sale.config.settings</field>
+		<field name="inherit_id" ref="sale.view_sales_config"/>
+		<field name="arch" type="xml">
+			<xpath expr="//group[2]" position="before">
+				<group string="Reservas">
+					<i>
+						Verifique que la exactitud decimal de las unidades de medida de tiempo
+						sean iguales (a horas y días), caso contrario puede obtener resultados inesperados
+						en la facturación.
+					</i><br/>
+					<field name="round_hours"/>
+					<field name="round_hours_to_day"/>
+					<field name="no_check_in_without_partnert"/>
+				</group>
+			</xpath>
+		</field>
+	</record>
+</odoo>

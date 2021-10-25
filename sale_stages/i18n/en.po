@@ -1,0 +1,107 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_stages
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20191114\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-14 16:58+0000\n"
+"PO-Revision-Date: 2019-11-14 13:40-0500\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
+"X-Generator: Poedit 2.2\n"
+
+#. module: sale_stages
+#: model:ir.model.fields,field_description:sale_stages.field_sale_order_stage__create_uid
+msgid "Created by"
+msgstr "Created by"
+
+#. module: sale_stages
+#: model:ir.model.fields,field_description:sale_stages.field_sale_order_stage__create_date
+msgid "Created on"
+msgstr "Created on"
+
+#. module: sale_stages
+#: model:ir.model.fields,field_description:sale_stages.field_sale_order_stage__display_name
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: sale_stages
+#: model:ir.model.fields,field_description:sale_stages.field_sale_order_stage__team_id
+msgid "Equipo"
+msgstr "Team"
+
+#. module: sale_stages
+#: model:ir.model.fields,help:sale_stages.field_sale_order_stage__team_id
+msgid "Equipo especifico que usa esta etapa. Otros equipos no serán capaces de ver o usar esta etapa."
+msgstr "Specific equipment that uses this stage. Other teams will not be able to see or use this stage."
+
+#. module: sale_stages
+#: model:ir.model.fields,field_description:sale_stages.field_sale_order_stage__id
+msgid "ID"
+msgstr "ID"
+
+#. module: sale_stages
+#: model:ir.model.fields,field_description:sale_stages.field_sale_order_stage____last_update
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: sale_stages
+#: model:ir.model.fields,field_description:sale_stages.field_sale_order_stage__write_uid
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: sale_stages
+#: model:ir.model.fields,field_description:sale_stages.field_sale_order_stage__write_date
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: sale_stages
+#: code:addons/sale_stages/models/sale_order.py:35
+#: code:addons/sale_stages/models/sale_order.py:40
+#: code:addons/sale_stages/models/sale_order.py:42
+#, python-format
+msgid "New"
+msgstr "New"
+
+#. module: sale_stages
+#: model:ir.model.fields,field_description:sale_stages.field_sale_order_stage__name
+msgid "Nombre"
+msgstr "Name"
+
+#. module: sale_stages
+#: model:ir.model,name:sale_stages.model_sale_order
+msgid "Sale Order"
+msgstr "Sale Order"
+
+#. module: sale_stages
+#: model:ir.model,name:sale_stages.model_crm_team
+msgid "Sales Channels"
+msgstr "Sales Channels"
+
+#. module: sale_stages
+#: model:ir.model.fields,field_description:sale_stages.field_crm_team__alt_sequence
+#: model:ir.model.fields,field_description:sale_stages.field_sale_order_stage__sequence
+msgid "Secuencia"
+msgstr "Sequence"
+
+#. module: sale_stages
+#: model:ir.model.fields,field_description:sale_stages.field_sale_order__stage_id
+msgid "Stage"
+msgstr "Stage"
+
+#. module: sale_stages
+#: model:ir.model,name:sale_stages.model_sale_order_stage
+msgid "Stage of sale order"
+msgstr "Stage of sale order"
+
+#. module: sale_stages
+#: model:ir.model.fields,help:sale_stages.field_sale_order_stage__sequence
+msgid "Usado para organizar pedidos de venta"
+msgstr "Used to organize sales orders"

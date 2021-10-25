@@ -1,0 +1,475 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_booking
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-05 17:18+0000\n"
+"PO-Revision-Date: 2019-12-05 14:10-0500\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"X-Generator: Poedit 2.2\n"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.view_booking_form
+msgid ""
+"&gt;\n"
+"                    <span>Registrar salida</span>"
+msgstr ""
+"&gt;\n"
+"                    <span>Check out</span>"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.view_sales_config
+msgid ""
+"<i>\n"
+"\t\t\t\t\t\tVerifique que la exactitud decimal de las unidades de medida de tiempo\n"
+"\t\t\t\t\t\tsean iguales (a horas y días), caso contrario puede obtener resultados inesperados\n"
+"\t\t\t\t\t\ten la facturación.\n"
+"\t\t\t\t\t</i><br/>"
+msgstr ""
+"<i>\n"
+"\t\t\t\t\t\tVerify that the decimal accuracy of the units of time measurement\n"
+"\t\t\t\t\t\tbe the same (hours and days), otherwise you can get unexpected results\n"
+"\t\t\t\t\t\tin billing.\n"
+"\t\t\t\t\t</i><br/>"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.view_booking_form
+msgid "<span>Devolver</span>"
+msgstr "<span>Return</span>"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.view_booking_form
+msgid "<span>Registrar ingreso</span>"
+msgstr "<span>Check in</span>"
+
+#. module: sale_booking
+#: model:ir.model.fields,help:sale_booking.field_sale_config_settings_round_hours_to_day
+msgid "Al generar una reserva cuyas horas no completen un día (24 horas), y si el servicio se mide en días este será considerado como 1 día completo"
+msgstr "When generating a reservation whose hours do not complete a day (24 hours), and if the service is measured in days this will be considered as 1 full day"
+
+#. module: sale_booking
+#: model:ir.model.fields,help:sale_booking.field_sale_config_settings_round_hours
+msgid "Al generar una reserva que no complete a una cantidad de horas exacta, esta se redondeará al mayor inmediato"
+msgstr "When generating a reservation that does not complete at an exact amount of hours, it will be rounded to the immediate highest"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_analytic_tag_ids
+msgid "Analytic Tags"
+msgstr "Analytic Tags"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_config_settings_no_check_in_without_partnert
+msgid "Bloquear ingreso sin socio registrado"
+msgstr "Block check in without a registered partner"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_booking_id
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_line_booking_id
+msgid "Booking id"
+msgstr "Booking id"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_ids
+msgid "Booking ids"
+msgstr "Booking ids"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_qty_delivered_updateable
+msgid "Can Edit Delivered"
+msgstr "Can Edit Delivered"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_company_id
+msgid "Company"
+msgstr "Company"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_create_uid
+msgid "Created by"
+msgstr "Created by"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_create_date
+msgid "Created on"
+msgstr "Created on"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_currency_id
+msgid "Currency"
+msgstr "Currency"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_order_partner_id
+msgid "Customer"
+msgstr "Customer"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_qty_delivered
+msgid "Delivered"
+msgstr "Delivered"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_customer_lead
+msgid "Delivery Lead Time"
+msgstr "Delivery Lead Time"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_name
+msgid "Description"
+msgstr "Description"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_discount
+msgid "Discount (%)"
+msgstr "Discount (%)"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_display_name
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: sale_booking
+#: selection:sale.order.booking,state_booking:0
+msgid "Entró"
+msgstr "Checked In"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_state_booking
+msgid "Estado"
+msgstr "State"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.view_booking_form
+msgid "Estado del expediente"
+msgstr "Sale Order State"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+msgid "Este año"
+msgstr "This year"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+msgid "Este mes"
+msgstr "This month"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+#: model:ir.ui.view,arch_db:sale_booking.tree_booking
+msgid "Expediente"
+msgstr "Sale Order"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_check_out
+msgid "Fin"
+msgstr "Check out"
+
+#. module: sale_booking
+#: model:ir.actions.act_window,help:sale_booking.action_booking
+msgid "Haga click para registrar una nueva reserva."
+msgstr "Click here to register a new booking"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+msgid "Hoy"
+msgstr "Today"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_id
+msgid "ID"
+msgstr "ID"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.view_order_form
+msgid "Ingreso"
+msgstr "In"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_check_in
+msgid "Inicio"
+msgstr "Check in"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_invoice_lines
+msgid "Invoice Lines"
+msgstr "Invoice Lines"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_invoice_status
+msgid "Invoice Status"
+msgstr "Invoice Status"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_qty_invoiced
+msgid "Invoiced"
+msgstr "Invoiced"
+
+#. module: sale_booking
+#: code:addons/sale_booking/models/sale_order.py:105
+#, python-format
+msgid "La fecha de ingreso no puede ser posterior a la fecha de salida"
+msgstr "The date of entry cannot be later than the date of departure"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking___last_update
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_write_uid
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_write_date
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_layout_category_sequence
+msgid "Layout Sequence"
+msgstr "Layout Sequence"
+
+#. module: sale_booking
+#: model:ir.model.fields,help:sale_booking.field_sale_order_booking_customer_lead
+msgid "Number of days between the order confirmation and the shipping of the products to the customer"
+msgstr "Number of days between the order confirmation and the shipping of the products to the customer"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_order_id
+msgid "Order Reference"
+msgstr "Order Reference"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_state
+msgid "Order Status"
+msgstr "Order Status"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_order_line
+msgid "Order line"
+msgstr "Order line"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+msgid "Por entrar"
+msgstr "To check in"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+msgid "Por salir"
+msgstr "To check out"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_price_reduce
+msgid "Price Reduce"
+msgstr "Price Reduce"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_price_reduce_taxexcl
+msgid "Price Reduce Tax excl"
+msgstr "Price Reduce Tax excl"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_price_reduce_taxinc
+msgid "Price Reduce Tax inc"
+msgstr "Price Reduce Tax inc"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_procurement_ids
+msgid "Procurements"
+msgstr "Procurements"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_product_id
+msgid "Product"
+msgstr "Product"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_product_uom_qty
+msgid "Quantity"
+msgstr "Quantity"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_config_settings_round_hours_to_day
+msgid "Redondear días a enteros"
+msgstr "Round to integer days"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_config_settings_round_hours
+msgid "Redondear horas a enteros"
+msgstr "Round to integer hours"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.view_order_form
+msgid "Registrar ingreso"
+msgstr "Do check in"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.view_order_form
+msgid "Registrar salida"
+msgstr "Do check out"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.view_booking_form
+msgid "Reserva"
+msgstr "Booking"
+
+#. module: sale_booking
+#: selection:sale.order.booking,state_booking:0
+msgid "Reservado"
+msgstr "Booked"
+
+#. module: sale_booking
+#: model:ir.actions.act_window,name:sale_booking.action_booking
+#: model:ir.model,name:sale_booking.model_sale_order_booking
+#: model:ir.ui.menu,name:sale_booking.menu_booking
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+#: model:ir.ui.view,arch_db:sale_booking.view_booking_calendar
+#: model:ir.ui.view,arch_db:sale_booking.view_order_form
+#: model:ir.ui.view,arch_db:sale_booking.view_sales_config
+msgid "Reservas"
+msgstr "Bookings"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+msgid "Reservas de ventas sin confirmar"
+msgstr "Unconfirmed sales bookings"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+msgid "Reservas cerradas, con la venta sin bloquear"
+msgstr "Closed reservations, with unblocked sale"
+
+#. module: sale_booking
+#: model:ir.model,name:sale_booking.model_sale_order
+msgid "Sales Order"
+msgstr "Sales Order"
+
+#. module: sale_booking
+#: model:ir.model,name:sale_booking.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Sales Order Line"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_salesman_id
+msgid "Salesperson"
+msgstr "Salesperson"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.view_order_form
+msgid "Salida"
+msgstr "Out"
+
+#. module: sale_booking
+#: selection:sale.order.booking,state_booking:0
+msgid "Salió"
+msgstr "Checked out"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_layout_category_id
+msgid "Section"
+msgstr "Section"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_sequence
+msgid "Sequence"
+msgstr "Sequence"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+#: model:ir.ui.view,arch_db:sale_booking.tree_booking
+#: model:ir.ui.view,arch_db:sale_booking.view_order_form
+msgid "Servicio"
+msgstr "Service"
+
+#. module: sale_booking
+#: model:ir.model.fields,help:sale_booking.field_sale_config_settings_no_check_in_without_partnert
+msgid "Si la linea de reserva no tiene un socio registrado no permitirá que esta se marqué como ingresada"
+msgstr "If the booking line does not have a registered partner it will not allow it to be marked as check in"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+msgid "Sin finalizar"
+msgstr "Sin finalizar"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+msgid "Sin validar"
+msgstr "Sin validar"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_partner_ids
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+msgid "Socios"
+msgstr "Partners"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_price_subtotal
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_price_tax
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_tax_id
+msgid "Taxes"
+msgstr "Taxes"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_qty_to_invoice
+msgid "To Invoice"
+msgstr "To Invoice"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_price_total
+msgid "Total"
+msgstr "Total"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_price_unit
+msgid "Unit Price"
+msgstr "Unit Price"
+
+#. module: sale_booking
+#: model:ir.model.fields,field_description:sale_booking.field_sale_order_booking_product_uom
+msgid "Unit of Measure"
+msgstr "Unit of Measure"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.view_booking_form
+msgid "Venta"
+msgstr "Sale"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+msgid "Ventas confirmadas con reservas por ingresar"
+msgstr "Sales confirmed with bookings to check in"
+
+#. module: sale_booking
+#: model:ir.ui.view,arch_db:sale_booking.search_booking
+msgid "Ventas confirmadas con reservas por salir"
+msgstr "Sales confirmed with bookings to check out"
+
+#. module: sale_booking
+#: code:addons/sale_booking/models/sale_order.py:211
+#, python-format
+msgid "Warning for %s"
+msgstr "Warning for %s"
+
+#. module: sale_booking
+#: model:ir.model,name:sale_booking.model_res_config_settings
+msgid "res.config.settings"
+msgstr "res.config.settings"
+
+#. module: sale_booking
+#: model:ir.model,name:sale_booking.model_sale_config_settings
+msgid "sale.config.settings"
+msgstr "sale.config.settings"

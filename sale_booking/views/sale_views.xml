@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="view_order_form" model="ir.ui.view">
+	<field name="name">sale.order.form</field>
+	<field name="model">sale.order</field>
+	<field name="inherit_id" ref="sale.view_order_form"/>
+	<field name="arch" type="xml">
+		<xpath expr="//notebook/page[1]" position="after">
+			<page string="Reservas">
+				<field name="booking_ids" context="{'default_allday': True}" attrs="{'readonly': [('state','in', ['cancel', 'done'])]}">
+					<tree editable="bottom"
+						decoration-success="state_booking=='checked_in'"
+						decoration-muted="state_booking=='checked_out'">
+						<field name="product_id" string="Servicio"
+							   attrs="{'readonly': ['|', ('procurement_ids', '!=', []), ('state_booking', '!=', 'booked')]}"
+							   domain="[('type', '=', 'service'), ('uom_id', 'in', [%(product.product_uom_day)d, %(product.product_uom_hour)d, %(product.product_uom_unit)d])]"
+							   context="{'partner_id':parent.partner_id, 'pricelist':parent.pricelist_id, 'company_id': parent.company_id, 'default_type': 'service', 'default_uom_id': %(product.product_uom_day)d}"/>
+
+						<field name="qty_invoiced" invisible="1"/>
+						<field name="product_uom_qty" invisible="1"/>
+						<field name="price_unit" attrs="{'readonly': ['|', ('state', 'in', ['cancel', 'done']), ('qty_invoiced', '&gt;', 0), ('state_booking', '!=', 'booked')]}"/>
+						<field name="tax_id" widget="many2many_tags" domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+						<field name="discount" groups="sale.group_discount_per_so_line" attrs="{'readonly': ['|', ('state', 'in', ['cancel', 'done']), ('state_booking', '!=', 'booked')]}"/>
+
+						<field name="check_in" attrs="{'readonly': ['|', ('state', 'in', ['cancel', 'done']), ('state_booking', '!=' , 'booked')]}"/>
+						<field name="check_out" attrs="{'readonly': ['|', ('state', 'in', ['cancel', 'done']), ('state_booking', '=', 'checked_out')]}"/>
+
+						<field name="state_booking" readonly="1"/>
+
+						<button name="do_check_in" string="Registrar ingreso" type="object" icon="fa-sign-in" states="booked"
+								attrs="{'invisible': ['|', ('state', '!=', 'sale'), ('state_booking','in',['checked_in','checked_out'])]}">
+							Ingreso
+						</button>
+            			<button name="do_check_out" string="Registrar salida" type="object" icon="fa-sign-out" states="check_in"
+								attrs="{'invisible': ['|', ('state', '!=', 'sale'), ('state_booking','in',['booked','checked_out'])]}">
+							Salida
+						</button>
+
+						<field name="procurement_ids" invisible="1"/>
+						<field name="state" invisible="1"/>
+						<field name="invoice_status" invisible="1"/>
+						<field name="customer_lead" invisible="1"/>
+						<field name="currency_id" invisible="1"/>
+					</tree>
+				</field>
+			</page>
+
+			<page string="Socios">
+				<field name="partner_ids" attrs="{'readonly': [('state', 'in', ['cancel', 'done'])]}">
+					<tree editable="bottom">
+						<field name="name"/>
+						<field name="phone"/>
+						<field name="email"/>
+						<field name="country_id"/>
+					</tree>
+				</field>
+			</page>
+		</xpath>
+	</field>
+</record>
+
+</odoo>
