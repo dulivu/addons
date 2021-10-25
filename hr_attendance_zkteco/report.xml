@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- FORMATO DE IMPRESION -->
+
+    <template id="template_report_attendance_summary">
+        <t t-call="report.html_container">
+            <t t-call="report.internal_layout">
+                <div class="page">
+                    <h3 class="mb32">Resumen de asistencias</h3>
+                    <h3 class="text-center mb32">
+                        Periodo: del <u><t t-esc="date_from"/></u> al <u><t t-esc="date_to"/></u>
+                    </h3>
+
+                    <table class="table table-bordered mb32" style="table-layout:auto">
+                        <thead>
+                            <tr>
+                                <th>Mes</th>
+                                <t t-foreach="get_months" t-as="month">
+                                    &lt;th class="text-center" colspan=<t t-esc="month['days']"/>&gt;<t t-esc="month['month_name']"/>&lt;/th&gt;
+                                </t>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">
+                                    <strong>Departamentos y Empleados</strong>
+                                </td>
+                                <t t-foreach="get_day" t-as="day">
+                                    &lt;td class="text-center oe_leftfit oe_rightfit" style="background-color:<t t-esc="day['color']"/>!important; font-size: .65em; min-width: 18px"&gt; <t t-esc="day['day_str']"/>&lt;/td&gt;
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-foreach="get_day" t-as="day">
+                                    &lt;td class="text-center oe_leftfit oe_rightfit" style="background-color:<t t-esc="day['color']"/>!important; font-size: .65em" &gt; <t t-esc="day['day']"/>&lt;/td&gt;
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="get_data_from_report" t-as="obj">
+                                <tr t-if="'dept' in obj">
+                                    <td style="background-color:#ababab">
+                                        <strong><t t-esc="obj['dept']"/></strong>
+                                    </td>
+                                    <t t-foreach="obj['color']" t-as="c">
+                                        <td/>
+                                    </t>
+                                </tr>
+                                <tr t-foreach="obj['data']" t-as="emp">
+                                    <td><t t-esc="emp['emp']"/></td>
+                                    <t t-foreach="emp['display']" t-as="details">
+                                        <td style="font-size: .7em;">
+                                            <t t-if="details['check_in']">
+                                                <t t-esc="'i:' + details['check_in']"></t><br/>
+                                                <t t-esc="'s:' + details['check_out']"></t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <report
+            id="report_attendance_summary"
+            string="Resumen de Asistencias"
+            model="hr.attendance"
+            report_type="qweb-pdf"
+            name="hr_attendance_zkteco.template_report_attendance_summary"
+            file="hr_attendance_zkteco.template_report_attendance_summary"
+            menu="False"/>
+
+    <record id="report_attendance_summary" model="ir.actions.report.xml">
+        <field name="paperformat_id" ref="hr_holidays.paperformat_hrsummary"/>
+    </record>
+
+    <!-- CREAR ACCION DESDE EL EMPLEADO -->
+
+    <record id="view_hr_holidays_summary_employee" model="ir.ui.view">
+        <field name="name">hr.attendance.summary.employee.form</field>
+        <field name="model">hr.attendance.summary.employee</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Summary">
+                <group col="4" colspan="6">
+                    <field name="date_from"/>
+                    <newline/>
+                    <field name="date_to"/>
+                    <newline/>
+                    <field name="emp" invisible="True"/>
+                </group>
+                <footer>
+                    <button name="print_report" string="Imprimir" type="object" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_attendances_employee" model="ir.actions.act_window">
+        <field name="name">Resumen de asistencias</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.attendance.summary.employee</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="value_hr_attendances_employee" model="ir.values">
+        <field name="model_id" ref="hr.model_hr_employee" />
+        <field name="name">Resumen de asistencias</field>
+        <field name="key2">client_print_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' + str(ref('action_hr_attendances_employee'))" />
+        <field name="key">action</field>
+        <field name="model">hr.employee</field>
+    </record>
+
+    <!-- POR DEPARTAMENTOS -->
+
+    <record id="view_hr_attendance_summary_dept" model="ir.ui.view">
+        <field name="name">hr.attendance.summary.dept.form</field>
+        <field name="model">hr.attendance.summary.dept</field>
+        <field name="arch" type="xml">
+        <form string="Asistencias por departamento">
+            <group>
+                <field name="date_from" />
+                <field name="date_to"/>
+                <field name="depts"/>
+            </group>
+            <footer>
+                <button name="print_report" string="Imprimir" type="object" class="btn-primary"/>
+                <button special="cancel" string="Cancelar" class="oe_right"/>
+            </footer>
+        </form>
+        </field>
+    </record>
+
+    <record id="action_hr_attendance_summary_dept" model="ir.actions.act_window">
+        <field name="name">Asistencias por departamento</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.attendance.summary.dept</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="menu_attendance_summary"
+        name="Asistencias por departamento"
+        parent="hr_attendance.menu_hr_attendance_report"
+        action="action_hr_attendance_summary_dept"/>
+
+</odoo>
