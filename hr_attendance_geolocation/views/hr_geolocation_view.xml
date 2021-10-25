@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_geolocation_view_form" model="ir.ui.view">
+        <field name="name">hr.geolocation.form</field>
+        <field name="model">hr.geolocation</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Geolocalizacion">
+                        <field name="latitude"/>
+                        <field name="longitude"/>
+                    </group>
+                    <div style="display: flex;justify-content: space-around;align-items: center;">
+                        <widget type="coordinates"/>
+                        <field name="photo" widget="image"/>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--<record model="ir.actions.client" id="action_report_map">
+        <field name="name">Reporte Geolocalizacion</field>
+        <field name="tag">hr_attendance_report_map</field>
+    </record>
+
+    <menuitem id="menu_report_map" parent="hr_attendance.menu_hr_attendance_root"
+              name="Reporte Geolocalización" sequence="10"
+              groups="hr_attendance.group_hr_attendance_user"
+              action="action_report_map"/>-->
+</odoo>

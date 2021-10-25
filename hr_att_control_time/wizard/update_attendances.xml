@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="hr_attendance_update_wizard" model="ir.ui.view">
+        <field name="name">Hr Attendance Update Time Wizard</field>
+        <field name="model">hr.attendance.update.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                    </group>
+                    <group>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+                <footer>
+                    <button type="object" name="button_update_attendances"
+                            string="Actualizar" class="oe_highlight"
+                            attrs="{'invisible':['|',('date_from','=',False),('date_to','=',False)]}"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

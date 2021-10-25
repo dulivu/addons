@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-extend="HrAttendanceMyMainMenu">
+        <t t-jquery="h1" t-operation="after">
+            <div class="loading">
+                <div>
+                <i class="fa fa-map-marker fa-4x"></i>
+                </div>
+                <p id="text-loading">Tomando Foto</p>
+            </div>
+            <div id='alert-message'/>
+            <div id="my_camera" style="margin:auto"/>
+            <div class="text-center">
+                <i style="color:#f0ad4e" class="fa fa-square"/> Ubicacion muy lejana
+                <i style="color:#21b799" class="fa fa-square"/> Ubicacion ideal
+            </div>
+            <script language="JavaScript">
+                Webcam.set({
+                width: 320,
+                height: 240,
+                image_format: 'jpeg',
+                jpeg_quality: 25
+                });
+                Webcam.attach('#my_camera');
+            </script>
+        </t>
+        <t t-jquery="i.fa-sign-in" t-operation="replace">
+            <!--<i class="fa fa-sign-in btn-default o_hr_attendance_sign_in_out_icon" disabled="true"/>-->
+            <a class="btn btn-default o_hr_attendance_sign_in_out_icon" style="line-height: 10rem;">
+                <i class="fa fa-sign-in" aria-hidden="true"></i>
+            </a>
+        </t>
+        <t t-jquery="i.fa-sign-out" t-operation="replace">
+            <!--<i class="fa fa-sign-out btn-default o_hr_attendance_sign_in_out_icon" disabled="true"/>-->
+            <a class="btn btn-default o_hr_attendance_sign_in_out_icon" style="line-height: 10rem;">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </a>
+        </t>
+    </t>
+</template>

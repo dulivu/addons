@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+    <t t-extend="HrAttendanceMyMainMenu">
+        <t t-jquery="div.o_hr_attendance_kiosk_mode" t-operation="replace">
+            <div class="o_hr_attendance_kiosk_mode">
+                <t t-if="widget.employee">
+                    <h1>Welcome <t t-esc="widget.employee.name"/></h1>
+                    <h2>Registre su asistencia</h2>
+                    <i class="fa fa-hand-paper-o btn-primary o_hr_attendance_sign_in_out_icon"/>
+                </t>
+                <t t-if="!widget.employee">
+                    Error : Could not find employee linked to user.
+                </t>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="WidgetCoordinates">
+        <iframe width="400" height="300"
+            t-attf-src="https://maps.google.com/maps?q={{coor_latitude}},{{coor_longitude}}&amp;z=17&amp;output=embed">
+        </iframe>
+    </t>
+
+    <t t-name="report_map">
+        <script type="text/javascript" async="false" t-attf-src="https://maps.googleapis.com/maps/api/js?key={{widget.api_key}}"></script>
+        <div class="container-fluid report-map">
+            <div class="page-header">
+                <h1>Reporte por Geolocalización</h1>
+                <input id="date" type="date" t-att-value="widget.date"/>
+            </div>
+            <div class="row" style="height:100%;display:flex">
+                <div class="col-sm-12" style="height:100%;display:flex;flex-direction:column">
+                    <div class="panel panel-default" style="height:100%;display:flex;flex-direction:column">
+                        <div class="panel-body" style="height:100%">
+                            <div class="row" style="height:100%">
+                                <div class="col-md-6" style="height:100%">
+                                    <div id="map"/>
+                                </div>
+                                <div class="col-md-6 list-attendance"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="list_attendance">
+        <t t-foreach="widget" t-as="i">
+            <div class="panel panel-success">
+                <div class="panel-heading"><t t-esc="i[0]"/></div>
+                <table class="table table-striped">
+                <thead>
+                    <th>Ingreso</th>
+                    <th></th>
+                    <th>Salida</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <t t-foreach="i[1]" t-as="j">
+                        <tr>
+                            <td>
+                                <p>
+                                    <i class="fa fa-clock-o"/>
+                                    <t t-esc="j.chkin_display"/>
+                                </p>
+                                <a class="location" t-att-data-chkin-location="j.chkin_location_id[0]">
+                                    <i class="fa fa-map-marker"/>
+                                    <t t-esc="j.chkin_location_id[1]"/>
+                                </a>
+                            </td>
+                            <td>
+                                <img t-attf-src="{{j.chkin_photo}}" width="120"/>
+                            </td>
+                            <td>
+                                <p>
+                                    <i class="fa fa-clock-o"/>
+                                    <t t-if="j.check_out" t-esc="j.chkout_display"/>
+                                </p>
+                                <a class="location" t-att-data-chkout-location="j.chkout_location_id[0]">
+                                    <i class="fa fa-map-marker"/>
+                                   <t t-esc="j.chkout_location_id[1]"/>
+                                </a>
+                            </td>
+                            <td><img t-attf-src="{{j.chkout_photo}}" width="120"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+            </div>
+        </t>
+    </t>
+</templates>

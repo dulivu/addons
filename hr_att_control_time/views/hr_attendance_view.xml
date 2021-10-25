@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_attendance_view_tree_inherit" model="ir.ui.view">
+        <field name="name">hr.attendance.tree.inherit</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <field name="check_in" position="before">
+                <field name="check_in" widget="datename" string="Día"/>
+            </field>
+            <field name="check_out" position="before">
+                <field name="chkin_time_diference" widget="float_time"/>
+            </field>
+            <field name="check_out" position="after">
+                <field name="chkout_time_diference" widget="float_time"/>
+                <field name="total_diference" widget="float_time"/>
+                <field name="department_id"/>
+            </field>
+            <tree position="attributes">
+                <attribute name="colors">green:total_diference&gt;0;red:total_diference&lt;0</attribute>
+            </tree>
+        </field>
+    </record>
+</odoo>
