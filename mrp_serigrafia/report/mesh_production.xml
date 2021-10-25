@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="mesh_production_report"
+                model="mesh.production"
+                string="Reporte Serigrafia"
+                report_type="qweb-html"
+                name="mrp_serigrafia.report_mesh_production"
+        />
+        <template id="report_mesh_production">
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <div class="page">
+                        <div class="page-header">
+                            <h3>Reporte serigrafia periodo
+                                <span t-field="docs[0].mrp_periodo_id"/>
+                            </h3>
+                        </div>
+                        <table class="table" style="font-size: 8pt;">
+                            <thead>
+                                <tr>
+                                    <th>Ficha</th>
+                                    <th>Modelo</th>
+                                    <th>Total
+                                        <br/>
+                                        Mallas
+                                    </th>
+                                    <th>Mallas
+                                        <br/>
+                                        Buenas
+                                    </th>
+                                    <th>Mallas
+                                        <br/>
+                                        Malas
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="total_mesh" t-value="0"/>
+                                <t t-set="total_good_mesh" t-value="0"/>
+                                <t t-set="total_bad_mesh" t-value="0"/>
+                                <t t-foreach="docs" t-as="o">
+                                    <tr>
+                                        <td>
+                                            <span t-field="o.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.product_id"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.total_qty_mesh"/>
+                                            <t t-set="total_mesh" t-value="int(total_mesh+o.total_qty_mesh)"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.qty_good_mesh"/>
+                                            <t t-set="total_good_mesh" t-value="int(total_good_mesh+o.qty_good_mesh)"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.qty_bad_mesh"/>
+                                            <t t-set="total_bad_mesh" t-value="int(total_bad_mesh+o.qty_bad_mesh)"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr style="font-weight: bold;">
+                                    <td colspan="2"></td>
+                                    <td>
+                                        <t t-esc="total_mesh"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="total_good_mesh"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="total_bad_mesh"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

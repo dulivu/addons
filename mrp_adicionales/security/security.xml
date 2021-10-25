@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="group_manager_adicionales" model="res.groups">
+            <field name="name">Mrp Adicionales/Administrador</field>
+            <field name="description">Administra el modulo Mrp Adicionales</field>
+        </record>
+
+        <record id="group_user_adicionales" model="res.groups">
+            <field name="name">Mrp Adicionales/Usuario</field>
+            <field name="description">Registra en el modulo Mrp Adicionales</field>
+<!--            <field name="implied_ids" eval="[4,[ref('group_manager_adicionales')], (4,[ref('group_user_adicionales')])]"/>-->
+        </record>
+
+        <!--<record model="ir.ui.menu" id="menu_mrp_addes_view">
+            <field name="groups_id" eval="[(4 ,0,[ref('group_manager_adicionales')]), (6,0,[ref('group_user_adicionales')])]"/>
+        </record>-->
+    </data>
+</odoo>

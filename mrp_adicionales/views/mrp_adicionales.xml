@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="adicional_view_form">
+            <field name="name">Adicionales</field>
+            <field name="model">mrp.adicional</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="button_mark_done" type="object" string="Realizado" attrs="{'invisible': ['|', ('state', '=', 'done'), ('state', '=', 'paid')]}"
+                        class="oe_highlight"/>
+                        <button name="button_generate_payments" type="object" string="Generar Pagos"
+                                attrs="{'invisible': ['|', ('state', '=', 'paid'), ('state', '=', 'draft')]}" groups="mrp_adicionales.group_manager_adicionales"
+                        class="oe_highlight" confirm="Si confirma, el registro ya no se podra modificar, ¿Continuar?"/>
+                        <button name="button_anular_payment" type="object" string="Anular Adicional" invisible="1"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done,paid"/>
+                    </header>
+                    <sheet>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading"><h2>ADICIONALES</h2></div>
+                            <div class="panel-body">
+                                <group>
+                                    <h2><field name="sequence_id" readonly="1"/></h2>
+                                </group>
+                                <group>
+                                    <field name="manual_option" invisible="1"/>
+                                </group>
+                                <group>
+                                    <field name="type_pay" invisible="1"/>
+                                    <field name="paid_flag" invisible="1"/>
+                                </group>
+                                <group>
+                                    <field name="manual_time" attrs="{'readonly': [('type_pay', '=', False)]}"/>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="area_id"/>
+                                    </group>
+                                    <group>
+                                    </group>
+                                </group>
+                            </div>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="servicio_id" attrs="{'invisible': [('manual_option','=',True)]}"/>
+                                <field name="description" attrs="{'invisible': [('manual_option','=',False)]}"/>
+                                <field name="currency_id" invisible="1"/>
+                                <label for="qty" attrs="{'invisible': [('type_pay', '=', True)]}"/>
+                                <div class="o_row">
+                                    <field name="qty" attrs="{'invisible': [('type_pay', '=', True)]}"/>
+                                    <!--<field name="product_uom_id" editable="1" attrs="{'invisible':[('type_pay', '=', True)], 'required': [('type_pay', '=', False)]}"/>-->
+                                </div>
+                                <label string="Tiempo HH:MM" attrs="{'invisible': [('type_pay', '=', False)]}"/>
+                                <div class="o_row">
+                                    <label string="Inicio" attrs="{'invisible': [('type_pay', '=', False)]}"/>
+                                    <field name="inicio_aux" attrs="{'invisible': [('type_pay', '=', False)]}" widget="float_time"/>
+                                    <label string="Fin" attrs="{'invisible': [('type_pay', '=', False)]}"/>
+                                    <field name="fin_aux" attrs="{'invisible': [('type_pay', '=', False)]}" widget="float_time"/>
+                                </div>
+                                <field name="cost" widget="monetary"/>
+                                <field name="duration_aux" attrs="{'readonly': [('manual_time', '=', False)], 'invisible': [('type_pay', '=', False)]}"
+                                       widget="float_time"/>
+                                <field name="amount_total" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="work_date"/>
+                                <label for="workcenter_id"/>
+                                <div class="o_row">
+                                    <field name="workcenter_id"/>
+                                    <button name="button_llenar_personal" type="object" class="btn btn-info" string="Asignar Personal">
+                                    </button>
+                                </div>
+                                <field name="period_aux" invisible="1"/>
+                                <field name="periodo"/>
+                            </group>
+                        </group>
+                        <field name="empleado_ids" domain="[('department_id.name', 'ilike', 'planta')]" attrs="{'invisible': [('paid_flag', '=', True)]}">
+                            <tree>
+                                <field name="name" string="Personal"/>
+                            </tree>
+                        </field>
+                        <button name="button_adicionar" type="object" class="btn btn-success btn-lg" string="Agregar Adicional" attrs="{'invisible': [('paid_flag', '=', True)]}"/>
+                        <separator/>
+                        <notebook>
+                            <page string="Detalle de Pago">
+                                <field name="pago_ids" attrs="{'readonly': [('paid_flag', '=', True)]}">
+                                    <tree editable="button" decoration-info="monto&gt;0">
+                                        <field name="empleado_id" domain="[('department_id.name', 'ilike', 'planta')]"/>
+                                        <field name="servicio_id"/>
+                                        <field name="fecha_pago"/>
+                                        <field name="monto" readonly="1" sum="Total Por Adicional"/>
+                                        <field name="currency_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <separator string="Observaciones"/>
+                        <field name="observacion"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_adicional_view" model="ir.actions.act_window">
+            <field name="name">Adicionales</field>
+            <field name="res_model">mrp.adicional</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="context">{'search_default_fil_by_currentdate': 1}</field>
+        </record>
+
+        <record id="mrp_adicionales_view_tree" model="ir.ui.view">
+            <field name="name">mrp_adicionales_tree</field>
+            <field name="model">mrp.adicional</field>
+            <field name="arch" type="xml">
+                <tree string="Recibos Adicionales" decoration-success="state=='paid'" decoration-danger="state=='done'" decoration-warning="state=='draft'">
+                    <field name="sequence_id"/>
+                    <field name="work_date"/>
+                    <field name="state"/>
+                    <field name="periodo"/>
+                    <button name="generate_pays" string="Generar Pago" type="object" class="oe_stat_button"
+                            attrs="{'invisible': ['|', ('state', '=', 'paid'), ('state', '=', 'draft')]}" groups="mrp_adicionales.group_manager_adicionales"
+                            confirm="Si confirma el registro ya no se podra modificar, ¿Continuar?"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="mrp_adicional_search_view" model="ir.ui.view">
+            <field name="name">adicional.search.view</field>
+            <field name="model">mrp.adicional</field>
+            <field name="arch" type="xml">
+                <search string="Informacion del Adicional">
+                    <field name="sequence_id"/>
+                    <field name="work_date"/>
+                    <field name="periodo"/>
+                    <filter name="fil_by_draft" string="Nuevo" domain="[('state', '=', 'draft')]" help="Registros en estado Nuevo"/>
+                    <filter name="fil_by_done" string="Realizado" domain="[('state', '=', 'done')]" help="Registros en estado Realizado"/>
+                    <filter name="fil_by_paid" string="Pagado" domain="[('state', '=', 'paid')]" help="Registros en estado Pagado"/>
+                    <separator/>
+                    <filter name="fil_by_currentdate" string="Periodo Actual" domain="[('period_aux','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), ('period_aux','&gt;=',time.strftime('%%Y-%%m-01'))]"
+                            help="Registros del periodo actual"/>
+                    <group expand="0" string="Group By">
+                        <filter name="groupby_state" string="Estado" domain="[]" context="{'group_by':'state'}" help="Agrupar por estado"/>
+                        <filter name="groupby_period" string="Periodo" domain="[]" context="{'group_by':'periodo'}" help="Agrupar por periodo"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <menuitem id="menu_mrp_addes_view"
+                  name="Adicionales y Descuentos"
+                  parent="mrp.menu_mrp_root"
+                  groups="mrp_adicionales.group_user_adicionales,mrp_adicionales.group_manager_adicionales"/>
+
+        <menuitem id="menu_mrp_adicional_view"
+                  name="Adicionales"
+                  parent="menu_mrp_addes_view"
+                  action="action_adicional_view"
+                  groups="mrp_adicionales.group_manager_adicionales,mrp_adicionales.group_user_adicionales"/>
+
+    </data>
+    <data noupdate="1">
+        <record id="sec_mrp_adicional" model="ir.sequence">
+            <field name="name">mrp_adicionales_sequencer</field>
+            <field name="code">mrp.adicional</field>
+            <field name="prefix">ADI</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

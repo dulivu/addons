@@ -1,0 +1,129 @@
+@media (max-width: 768px){
+  .my-attendance-report{
+    position: absolute;
+    width: 100%;
+    .container{
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      .header{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        margin: 0 -16px 0 -16px;
+        z-index: 200;
+        display: flex;
+        flex-direction: column-reverse;
+        background-color: #EFEFEF;
+        padding-bottom: 15px;
+      }
+      .row.body{
+        flex-grow:1;
+        overflow-y: auto;
+        padding-bottom: 35%;
+        .empty{
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction:column;
+          justify-content: center;
+          align-items: center;
+          font-size: 2rem;
+          padding-bottom: 35%;
+          color: #b1b1b1;
+        }
+      }
+    }
+  }
+}
+
+.my-attendance-report{
+  background-color: #ebebeb;
+  height: 100%;
+  .btn-group{
+    display: flex;
+    &>button{
+      flex-grow: 1;
+      &.active{
+        color: white;
+        background-color: #21b799;
+        &::after{
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          margin-left: -6px;
+          width: 0;
+          height: 0;
+          border-top: solid 6px transparent;
+          border-left: solid 6px transparent;
+          border-right: solid 6px transparent;
+          border-bottom: solid 6px white;
+        }
+      }
+    }
+  }
+  .header>div{
+    margin-top: 15px;
+  }
+  .buttons-navigation{
+    text-align: right;
+  }
+  @media (max-width: 768px){
+    .buttons-navigation{
+      text-align: center;
+      margin-top: 15px;
+    }
+  }
+  .board-attendance{
+    background-color: white;
+    margin-top: 15px;
+    display: flex;
+    padding-right: 15px;
+    .icon{
+      flex-grow: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      &.positive{
+        color: green;
+      }
+      &.negative{
+        color: red;
+      }
+    }
+    .body{
+      flex-grow: 4;
+      &>div{
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    .icon-enter{
+      flex-grow:1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.info-circle{
+  display: inline-block;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 50%;
+  font-weight: bold;
+  padding: 1.4rem;
+  p{
+    &:first-child{
+      font-size: 2rem;
+      line-height: 2rem;
+    }
+    padding: 0;
+    margin: 0;
+  }
+}

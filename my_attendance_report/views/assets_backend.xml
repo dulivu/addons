@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="hr_geolocation assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/my_attendance_report/static/src/css/styles.css"/>
+            <script type="text/javascript" src="/my_attendance_report/static/src/js/my_attendance_report.js"></script>
+        </xpath>
+    </template>
+</odoo>

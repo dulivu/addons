@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="bonus_form_view">
+            <field name="name">Bonos</field>
+            <field name="model">mrp.bonus</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="button_mark_done" type="object" string="Realizado" class="oe_highlight" states="draft"/>
+                        <button name="button_generate_bonus" type="object" string="Generar Bono" class="oe_highlight" states="done"
+                                confirm="Si confirma, el registro ya no se podrá modificar, ¿continuar?"/>
+                        <button name="button_cancel_bonus" type="object" string="Anular Bono" class="oe_highlight" invisible="1"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done,paid" statusbar_colors="{'draft':'blue'}"/>
+                    </header>
+                    <sheet>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading"><h2>BONOS Y SUELDOS FIJOS</h2></div>
+                        </div>
+                        <group>
+                            <field name="type" widget="radio" attrs="{'readonly': [('paid_flag', '=', True)]}"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="paid_flag" invisible="1"/>
+                                <field name="concepto"/>
+                                <field name="cost" widget="monetary"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="fecha"/>
+                            </group>
+                            <group>
+                                <field name="periodo"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="employee_ids" domain="[('department_id.name', 'ilike', 'planta')]" states="draft,done">
+                                <tree>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <button name="button_bonus" type="object" class="btn btn-success btn-lg" string="Agregar Bono" states="draft,done"/>
+                        <separator/>
+                        <notebook>
+                            <page string="Detalle de Pago">
+                                <field name="pago_ids" attrs="{'readonly': [('paid_flag', '=', True)]}">
+                                    <tree editable="button" decoration-info="monto&gt;0">
+                                        <field name="empleado_id" domain="[('department_id.name', 'ilike', 'planta')]"/>
+                                        <field name="fecha_pago"/>
+                                        <field name="monto" readonly="1" sum="Total por Descuento"/>
+                                        <field name="currency_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <separator string="Observaciones"/>
+                        <field name="observacion"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="mrp_bonus_tree_view" model="ir.ui.view">
+            <field name="name">mrp.bonus.tree.view</field>
+            <field name="model">mrp.bonus</field>
+            <field name="arch" type="xml">
+                <tree string="Bonus" decoration-success="state=='paid'" decoration-danger="state=='done'" decoration-warning="state=='draft'">
+                    <field name="concepto"/>
+                    <field name="state"/>
+                    <field name="fecha"/>
+                    <field name="periodo"/>
+                    <field name="type"/>
+                    <button name="generate_bonus" string="Generar Bono" type="object" class="oe_highlight" states="done"
+                            confirm="Si confirma el registro ya no se podra modificar, ¿Continuar?"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bonus_search_view" model="ir.ui.view">
+            <field name="name">mrp.bonus.search.view</field>
+            <field name="model">mrp.bonus</field>
+            <field name="arch" type="xml">
+                <search string="Bonos">
+                    <field name="concepto"/>
+                    <separator/>
+                    <field name="state"/>
+                    <field name="fecha"/>
+                    <field name="periodo"/>
+                    <filter name="fil_by_draft" string="Nuevo" domain="[('state', 'in', ['draft'])]" help="Registros en estado Nuevo"/>
+                    <filter name="fil_by_done" string="Realizado" domain="[('state', 'in', ['done'])]" help="Registros en estado Realizado"/>
+                    <filter name="fil_by_paid" string="Pagado" domain="[('state', 'in', ['paid'])]" help="Registros en estado Pagado"/>
+                    <separator/>
+                    <filter name="fil_by_bonus" string="Bonos" domain="[('type', 'in', ['bonus'])]" help="Registros de Bonos"/>
+                    <filter name="fil_by_fixed_salary" string="Sueldos Fijos" domain="[('type', 'in', ['fixed_salary'])]" help="Registros de Sueldos Fijos"/>
+                    <group expand="0" string="Group By">
+                        <filter name="groupby_period" string="Periodo" domain="[]" context="{'group_by':'periodo'}"
+                                help="Agrupar por periodo"/>
+                        <filter name="groupby_state" string="Estado" domain="[]" context="{'group_by':'state'}"
+                                help="Agrupar por estado"/>
+                        <filter name="groupby_type" string="Tipo" domain="[]" context="{'group_by':'type'}"
+                                help="Agrupar por tipo"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_bonus_view" model="ir.actions.act_window">
+            <field name="name">Bonos y Sueldos Fijos</field>
+            <field name="res_model">mrp.bonus</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="context">{'search_default_fil_by_bonus': 0}</field>
+        </record>
+
+        <menuitem id="menu_mrp_bonus_view"
+                  name="Bonos y Sueldos Fijos"
+                  parent="menu_mrp_addes_view"
+                  action="action_bonus_view"
+                  groups="mrp_adicionales.group_manager_adicionales"/>
+    </data>
+</odoo>

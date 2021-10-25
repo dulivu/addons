@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="descuento_view_form">
+            <field name="name">Descuentos</field>
+            <field name="model">mrp.descuento</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="button_mark_done" type="object" string="Realizado" attrs="{'invisible': ['|', ('state', '=', 'done'), ('state', '=', 'paid')]}"
+                        class="oe_highlight"/>
+                        <button name="button_generate_discount" type="object" string="Generar Descuento"
+                                attrs="{'invisible': ['|', ('state', '=', 'paid'), ('state', '=', 'draft')]}" groups="mrp_adicionales.group_manager_adicionales"
+                        class="oe_highlight" confirm="Si confirma, el registro ya no se podra modificar, ¿Continuar?"/>
+                        <button name="button_anular_descuento" type="object" string="Anular Descuento" invisible="1" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done,paid" statusbar_colors="{'draft':'blue','cancel':'red'}"/>
+                    </header>
+                    <sheet>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading"><h2>DESCUENTOS</h2></div>
+                        </div>
+                        <group>
+                            <h2><field name="sequence_id" readonly="1"/></h2>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="paid_flag" invisible="1"/>
+                                <field name="concepto"/>
+                                <field name="cost" widget="monetary"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="fecha"/>
+                            </group>
+                            <group>
+                                <field name="period_aux" invisible="1"/>
+                                <field name="periodo"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="empleado_ids" domain="[('department_id.name', 'ilike', 'planta')]"
+                                   attrs="{'invisible': [('paid_flag', '=', True)]}">
+                                <tree>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <button name="button_descontar" type="object" class="btn btn-success btn-lg" string="Agregar Descuento"
+                                    attrs="{'invisible': [('paid_flag', '=', True)]}"/>
+                        <separator/>
+                        <notebook>
+                            <page string="Detalle de Descuento">
+                                <field name="pago_ids" attrs="{'readonly': [('paid_flag', '=', True)]}">
+                                    <tree editable="button" decoration-danger="monto&lt;0">
+                                        <field name="empleado_id" domain="[('department_id.name', 'ilike', 'planta')]"/>
+                                        <field name="fecha_pago"/>
+                                        <field name="concept"/>
+                                        <field name="monto" readonly="1" sum="Total por Descuento"/>
+                                        <field name="currency_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <separator string="Observaciones"/>
+                        <field name="observacion"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_descuento_view" model="ir.actions.act_window">
+            <field name="name">Descuentos</field>
+            <field name="res_model">mrp.descuento</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="context">{'search_default_fil_by_currentdate': 1}</field>
+        </record>
+
+        <record id="mrp_descuentos_tree_view" model="ir.ui.view">
+            <field name="name">mrp_descuentos_tree</field>
+            <field name="model">mrp.descuento</field>
+            <field name="arch" type="xml">
+                <tree string="Recibos de Descentos" decoration-success="state=='paid'" decoration-danger="state=='done'" decoration-warning="state=='draft'">
+                    <field name="sequence_id"/>
+                    <field name="concepto"/>
+                    <field name="fecha"/>
+                    <field name="state"/>
+                    <field name="periodo"/>
+                    <button name="generate_pays" string="Generar Descuento" type="object" class="oe_link"
+                            attrs="{'invisible': ['|', ('state', '=', 'draft'), ('state', '=', 'paid')]}" groups="mrp_adicionales.group_manager_adicionales"
+                            confirm="Si confirma el registro ya no se podra modificar, ¿Continuar?"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="mrp_descuento_search_view" model="ir.ui.view">
+            <field name="name">descuento.search.view</field>
+            <field name="model">mrp.descuento</field>
+            <field name="arch" type="xml">
+                <search string="Informacion del Descuento">
+                    <field name="sequence_id"/>
+                    <field name="concepto"/>
+                    <field name="fecha"/>
+                    <field name="state"/>
+                    <field name="periodo"/>
+                    <filter name="fil_by_draft" string="Nuevo" domain="[('state', '=', 'draft')]" help="Registros en estado Nuevo"/>
+                    <filter name="fil_by_done" string="Realizado" domain="[('state', '=', 'done')]" help="Registros en estado Realizado"/>
+                    <filter name="fil_by_paid" string="Pagado" domain="[('state', '=', 'paid')]" help="Registros en estado Pagado"/>
+                    <separator/>
+                    <filter name="fil_by_currentdate" string="Periodo Actual" domain="[('period_aux','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), ('period_aux','&gt;=',time.strftime('%%Y-%%m-01'))]"
+                            help="Registros del periodo actual"/>
+                    <group expand="0" string="Group By">
+                        <filter name="groupby_state" string="Estado" domain="[]" context="{'group_by':'state'}" help="Agrupar por estado"/>
+                        <filter name="groupby_period" string="Periodo" domain="[]" context="{'group_by':'periodo'}" help="Agrupar por periodo"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <menuitem id="menu_mrp_descuento_view"
+                  name="Descuentos"
+                  parent="menu_mrp_addes_view"
+                  action="action_descuento_view"
+                  groups="mrp_adicionales.group_manager_adicionales,mrp_adicionales.group_user_adicionales"/>
+    </data>
+
+    <data noupdate="1">
+        <record id="sec_mrp_descuento" model="ir.sequence">
+            <field name="name">mrp_descuento_sequence</field>
+            <field name="code">mrp.descuento</field>
+            <field name="prefix">DES</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

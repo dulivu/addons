@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-name="MyAttendanceReport">
+        <div class="my-attendance-report">
+            <div class="container">
+                <div class="row header">
+                    <!--Aqui va la cabecera del reporte-->
+                </div>
+                <div class="row body">
+                </div>
+            </div>
+        </div>
+    </t>
+    <t t-name="MyAttHeader">
+        <div class="col-sm-6 col-md-6">
+            <div class="btn-group" role="group">
+                <button id="weekly" t-attf-class="btn btn-default {{modeReport=='weekly'?'active':''}}">Semanal</button>
+                <button id="monthly" t-attf-class="btn btn-default {{modeReport=='monthly'?'active':''}}">Mensual
+                </button>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 buttons-navigation">
+            <button id="prev-date" class="o_calendar_button_prev btn btn-primary">
+                <span class="fa fa-arrow-left"></span>
+            </button>
+            <button class="o_calendar_button_today btn btn-primary">
+                <t t-if="modeReport=='weekly'"
+                   t-esc="currentDate.week()==moment().week()?'Esta Semana':'Semana '+currentDate.week()"/>
+                <t t-if="modeReport=='monthly'"
+                   t-esc="currentDate.month()==moment().month()?'Este mes':currentDate.format('MMMM')"/>
+            </button>
+            <button id="next-date" class="o_calendar_button_next btn btn-primary">
+                <span class="fa fa-arrow-right"></span>
+            </button>
+        </div>
+        <!--<div class="col-xs-12">
+            <span class="info-circle">
+                <p><t t-esc="notWorkedDays.length"/></p>
+                <p>Faltas</p>
+            </span>
+        </div>-->
+    </t>
+
+    <t t-name="listAttendances">
+        <t t-if="listAttendances.length==0">
+            <div class="empty">
+                <i class="fa fa-calendar-o"/>
+                <span>No se encontraron registros</span>
+            </div>
+        </t>
+        <t t-foreach="listAttendances" t-as="attendance">
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <t t-call="boardAttendance"/>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="boardAttendance">
+        <div class="board-attendance" t-att-data-id="attendance.id">
+            <div t-attf-class="icon {{ attendance.positive?'positive':'negative' }}">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"/>
+                    <i  t-if="attendance.positive" class="fa fa-plus fa-stack-1x fa-inverse"/>
+                    <i  t-else="" class="fa fa-minus fa-stack-1x fa-inverse"/>
+                </span>
+                <p><t t-esc="attendance.total_diference"/></p>
+            </div>
+            <div class="body">
+                <div>
+                    <p><strong><t t-esc="attendance.check_in.format('dddd')"/></strong></p>
+                    <span><strong><t t-esc="attendance.check_in.format('DD/MM/YYYY')"/></strong></span>
+                </div>
+                <p>
+                    <span class="fa fa-sign-in"/>
+                    <t t-esc="attendance.check_in.format('HH:mm')"/>
+                    <span class="badge"><t t-esc="attendance.chkin_time_diference"/></span>
+                </p>
+                <p t-if="attendance.check_out">
+                    <span class="fa fa-sign-out"/>
+                    <t t-esc="attendance.check_out.format('HH:mm')"/>
+                    <span class="badge"><t t-esc="attendance.chkout_time_diference"/></span>
+                </p>
+            </div>
+            <!--<div class="icon-enter">
+                <span class="fa fa-chevron-right"></span>
+            </div>-->
+        </div>
+    </t>
+</template>

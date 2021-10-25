@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.client" id="action_my_attendance_report">
+        <field name="name">Mi Reporte de Asistencia</field>
+        <field name="tag">my_attendance_report</field>
+    </record>
+
+    <!--<menuitem id="menu_report_map" parent="hr_attendance.menu_hr_attendance_root"
+              name="Mi Reporte" sequence="10"
+              groups="hr_attendance.group_hr_attendance_user"
+              action="action_my_attendance_report"/>-->
+</odoo>

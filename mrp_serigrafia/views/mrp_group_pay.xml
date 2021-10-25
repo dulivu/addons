@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mrp_group_pay_view_form_inherit" model="ir.ui.view">
+            <field name="name">Mrp group pay view form inherit</field>
+            <field name="model">mrp.group.pay</field>
+            <field name="inherit_id" ref="mrp_kantu.mrp_group_pay_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='button_generate_pays']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('can_process_pay','=',False)]}
+                    </attribute>
+                    <attribute name="confirm">¿Generar los pagos?
+                    </attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_revert_pays']" position="after">
+                    <field name="state" widget="statusbar" statusbar_visible="open,paid"/>
+                </xpath>
+                <xpath expr="//button[@name='button_revert_pays']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('can_process_pay','=',True)]}</attribute>
+                    <attribute name="confirm">¿Revertir los pagos?</attribute>
+                </xpath>
+                <field name="mrp_periodo_id" position="after">
+                    <field name="total_qty_to_pay" invisible="not context.get('serigraphy_pay', False)"/>
+                    <field name="service_pay_id" invisible="not context.get('serigraphy_pay', False)" attrs="{'invisible': [('total_qty_to_pay','&lt;',0)]}"/>
+                    <field name="total_qty_to_disc" invisible="not context.get('serigraphy_pay', False)"/>
+                    <field name="service_disc_id" invisible="not context.get('serigraphy_pay', False)" attrs="{'invisible': [('total_qty_to_disc','&lt;',0)]}"/>
+                    <field name="can_process_pay" invisible="1"/>
+                </field>
+                <field name="employee_id" position="after">
+                    <field name="percentage"/>
+                    <field name="individual_amount" invisible="not context.get('serigraphy_pay', False)"/>
+                </field>
+                <field name="pay_group_compute_ids" position="after">
+                    <separator string="Observaciones"/>
+                    <field name="observation"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="mrp_group_pay_view_tree" model="ir.ui.view">
+            <field name="name">Mrp group pay view tree</field>
+            <field name="model">mrp.group.pay</field>
+            <field name="arch" type="xml">
+                <tree string="Serigrafia">
+                    <field name="name"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="mrp_group_pay_view_search" model="ir.ui.view">
+            <field name="name">Mrp group pay search view</field>
+            <field name="model">mrp.group.pay</field>
+            <field name="arch" type="xml">
+                <search string="Serigrafia">
+                    <filter name="fil_by_open" string="Abierto" domain="[('state','in',['open'])]" help="Registros en estado abierto"/>
+                    <filter name="fil_by_paid" string="Pagado" domain="[('state','in',['paid'])]" help="Registros en estado Pagado"/>
+                    <group expand="0" string="Group By">
+                        <filter name="groupby_state" string="Estado" domain="[]" context="{'group_by': 'state'}" help="Agrupar por estado"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

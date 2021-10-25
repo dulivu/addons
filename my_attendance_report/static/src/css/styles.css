@@ -1,0 +1,127 @@
+@media (max-width: 768px) {
+  .my-attendance-report {
+    position: absolute;
+    width: 100%;
+  }
+  .my-attendance-report .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .my-attendance-report .container .header {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 0 -16px 0 -16px;
+    z-index: 200;
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: #EFEFEF;
+    padding-bottom: 15px;
+  }
+  .my-attendance-report .container .row.body {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-bottom: 35%;
+  }
+  .my-attendance-report .container .row.body .empty {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    padding-bottom: 35%;
+    color: #b1b1b1;
+  }
+}
+.my-attendance-report {
+  background-color: #ebebeb;
+  height: 100%;
+}
+.my-attendance-report .btn-group {
+  display: flex;
+}
+.my-attendance-report .btn-group > button {
+  flex-grow: 1;
+}
+.my-attendance-report .btn-group > button.active {
+  color: white;
+  background-color: #21b799;
+}
+.my-attendance-report .btn-group > button.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -6px;
+  width: 0;
+  height: 0;
+  border-top: solid 6px transparent;
+  border-left: solid 6px transparent;
+  border-right: solid 6px transparent;
+  border-bottom: solid 6px white;
+}
+.my-attendance-report .header > div {
+  margin-top: 15px;
+}
+.my-attendance-report .buttons-navigation {
+  text-align: right;
+}
+@media (max-width: 768px) {
+  .my-attendance-report .buttons-navigation {
+    text-align: center;
+    margin-top: 15px;
+  }
+}
+.my-attendance-report .board-attendance {
+  background-color: white;
+  margin-top: 15px;
+  display: flex;
+  padding-right: 15px;
+}
+.my-attendance-report .board-attendance .icon {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.my-attendance-report .board-attendance .icon.positive {
+  color: green;
+}
+.my-attendance-report .board-attendance .icon.negative {
+  color: red;
+}
+.my-attendance-report .board-attendance .body {
+  flex-grow: 4;
+}
+.my-attendance-report .board-attendance .body > div {
+  display: flex;
+  justify-content: space-between;
+}
+.my-attendance-report .board-attendance .icon-enter {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.info-circle {
+  display: inline-block;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 50%;
+  font-weight: bold;
+  padding: 1.4rem;
+}
+.info-circle p {
+  padding: 0;
+  margin: 0;
+}
+.info-circle p:first-child {
+  font-size: 2rem;
+  line-height: 2rem;
+}
