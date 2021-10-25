@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="view_holiday_pivot" model="ir.ui.view">
+        <field name="name">hr.holidays.report_pivot</field>
+        <field name="model">hr.holidays</field>
+        <field name="inherit_id" ref="hr_holidays.view_holiday_pivot"></field>
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="holiday_status_id" type="row"/>
+            </field>
+            <field name="number_of_days" position="replace">
+                <field name="number_of_days" type="measure"/>
+                <field name="number_of_hours" type="measure" widget="float_time"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record id="view_holiday_employee" model="ir.ui.view">
+        <field name="name">hr.holidays.report_employee_tree</field>
+        <field name="model">hr.holidays</field>
+        <field name="inherit_id" ref="hr_holidays.view_holiday_employee"></field>
+        <field name="arch" type="xml">
+            <field name="number_of_days" position="after">
+                <field name="number_of_hours"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record id="hr_holidays.action_hr_available_holidays_report" model="ir.actions.act_window">
+        <field name="context">{'search_default_leaves':1,'search_default_allocations':1}</field>
+    </record>
+
+
+    <record id="hr_holidays.open_employee_leaves" model="ir.actions.act_window">
+        <field name="context">{'search_default_todo': 1}</field>
+        <field name="domain"></field>
+    </record>
+
+    <!-- FORMATO DE IMPRESION -->
+
+    <template id="report_holiday">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="report.external_layout">
+                    <div class="page">
+                        <h3 style="text-align: center;" t-if="o.type == 'remove'">Solicitud de Vacaciones/Permisos</h3>
+                        <h3 style="text-align: center;" t-if="o.type == 'add'">Solicitud de Recuperación/Horas extra</h3>
+                        <h3 style="text-align: center; color: red;" t-if="o.state != 'validate'">La solicitud no fue aprobada</h3>
+
+                        <p style="text-align: right;"><b>Fecha: <span t-field="o.create_date" t-field-options="{'format': 'dd/MM/yyyy'}"></span></b></p>
+                        <p style="text-align: center;"><b>Señor(a) Gerente/Jefe de la empresa <span t-field="res_company.partner_id.name"></span></b></p>
+
+                        <p>
+                            <b>Yo:</b> <span t-field="o.employee_id.name"></span><br/>
+                            <b>Identificado con:</b> <span t-field="o.employee_id.identification_id"></span>
+                        </p>
+
+                        <p>
+                            <b>Departamento:</b> <span t-field="o.department_id.display_name"></span><br/>
+                            <b>Solicito:</b> <span t-field="o.holiday_status_id.name"></span><br/>
+                            <b>Duración:</b> <span t-field="o.date_from"></span> al <span t-field="o.date_to"></span> (<span t-field="o.number_of_days"></span> días, <span t-field="o.number_of_hours"></span> horas)<br/>
+                            <b>Detalle:</b> <span t-field="o.name"></span>
+                        </p>
+
+                        <p style="font-size: .85em">
+                            <i>
+                                Nota:<br/>
+                                <span style="text-decoration: underline;">Recuperación de horas:</span> Si recupera horas debe llenar su formato
+                                respectivo y ser en coordinación con su Jefe inmediato de no hacerse efectiva la recuperación se procede al descuento correspondiente.<br/>
+                                <span style="text-decoration: underline;">Permisos con goce de haber:</span> Serán otorgados para casos especiales debidamente
+                                justificados y debe ser autorizado por el Jefe inmediato. Se solicitará sustento respectivo
+                                / No hay recuperación de horas por este concepto.
+                            </i>
+                        </p>
+
+                        <p style="text-align: right;">
+                            Atentamente<br/><br/>
+                            Firma y Huella digital del trabajador: .........................................................................<br/><br/>
+                            Nombres y Apellidos del trabajador: .........................................................................<br/><br/>
+                        </p>
+
+                        <p style="text-align: center; margin: 7em 0 5em 0;">
+                            ___________________________________<br/>
+                            Firma y Sello del Aprobador
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <report id="holidays_format"
+            model="hr.holidays"
+            string="Formato impreso"
+            report_type="qweb-pdf"
+            name="hr_holidays_hours.report_holiday"
+            file="hr_holidays_hours.report_holiday"/>
+
+</odoo>

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+
+    <record id="view_holiday_form" model="ir.ui.view">
+        <field name="name">Leave Request</field>
+        <field name="model">hr.holidays</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_new"></field>
+        <field name="arch" type="xml">
+            <xpath expr="//group/group/div" position="replace">
+                <div>
+                    <div>
+                        <field name="date_from" attrs="{'required':1}" class="oe_inline"/>
+                        <label string="-" class="oe_inline"/>
+                        <field name="date_to"  attrs="{'required':1}" class="oe_inline"/>
+                    </div>
+                    <div>
+                        <field name="number_of_days_temp" class="oe_inline"/> día(s)
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_holiday_status_form" model="ir.ui.view">
+        <field name="name">hr.holidays.status.form</field>
+        <field name="model">hr.holidays.status</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"></field>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="status_type"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record id="view_holiday_simple" model="ir.ui.view">
+        <field name="name">hr.holidays.report_tree</field>
+        <field name="model">hr.holidays</field>
+        <field name="inherit_id" ref="hr_holidays.view_holiday_simple"></field>
+        <field name="arch" type="xml">
+            <field name="number_of_days" position="after">
+                <field name="number_of_hours"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record id="view_holiday_allocation_tree" model="ir.ui.view">
+        <field name="name">hr.holidays.allocation.tree</field>
+        <field name="model">hr.holidays</field>
+        <field name="inherit_id" ref="hr_holidays.view_holiday_allocation_tree"></field>
+        <field name="arch" type="xml">
+            <field name="number_of_days" position="replace">
+                <field name="number_of_days"/>
+                <field name="number_of_hours"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
