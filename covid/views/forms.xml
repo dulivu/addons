@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_covid_dj_form" model="ir.ui.view">
+        <field name="name">covid.dj.form</field>
+        <field name="model">covid.dj</field>
+        <field name="arch" type="xml">
+            <form string="Declaración Jurada">
+                <sheet>
+                    <style>
+                        .djpage * {font-size: 1.11em;}
+                        .djpage input {font-size: .9em}
+                    </style>
+                    <div class="djpage">
+                        <h1>DECLARACION JURADA/ SINTOMATOLOGIA Y ANTECEDENTES PERSONALES COVID-19</h1>
+                        <h2>Ministerio de Salud - Resolución Ministerial Nro. 239-2020-MINSA</h2>
+
+                        <div style="border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;">
+                            <p>DECLARO BAJO JURAMENTO QUE LOS DATOS SEÑALADOS, EXPRESAN LA VERDAD.</p>
+                            <p>Y de acuerdo a la Ley General de Salud doy consentimiento para que la información brindada sea usada para la vigilancia epidemiológica COVID -19</p>
+                        </div>
+
+                        <div groups="hr.group_hr_user">
+                            <p>
+                                <label for="user_id" groups="hr.group_hr_user"/><br/>
+                                <field name="user_id" class="user oe_inline"/>
+                            </p>
+                            <p>
+                                <label for="date"/><br/>
+                                <field name="date" class="user oe_inline"/>
+                            </p>
+                        </div>
+
+                        <div style="border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;">
+                            <p><label for="doc_type"/><field name="doc_type" class="oe_inline"/></p>
+                            <p><label for="doc_num"/><field name="doc_num" class="oe_inline"/></p>
+                            <p><label for="age"/><field name="age" class="oe_inline"/></p>
+                            <p><label for="gender"/><field name="gender" class="oe_inline"/></p>
+                            <p><label for="work"/><field name="work" class="oe_inline"/></p>
+                            <p><label for="employeer"/><field name="employeer" class="oe_inline"/></p>
+                            <p><label for="country"/><field name="country" class="oe_inline"/></p>
+                            <p><label for="departamento"/><field name="departamento" class="oe_inline"/></p>
+                            <p><label for="provincia"/><field name="provincia" class="oe_inline"/></p>
+                            <p><label for="distrito"/><field name="distrito" class="oe_inline"/></p>
+                            <p><label for="direc"/><field name="direc" class="oe_inline"/></p>
+                            <p><label for="email"/><field name="email" class="oe_inline"/></p>
+                            <p><label for="cel"/><field name="cel" class="oe_inline"/></p>
+                            <p><label for="phone"/><field name="phone" class="oe_inline"/></p>
+                            <p><label for="familiar"/><field name="familiar" class="oe_inline"/></p>
+                            <p><label for="familiar_cel"/><field name="familiar_cel" class="oe_inline"/></p>
+                            <p><label for="familiar_work"/><field name="familiar_work" class="oe_inline"/></p>
+                        </div>
+
+                        <p><b>¿Qué síntomas presenta? marque los cuadros correspondientes</b></p>
+                        <p><field name="q4a"/><label for="q4a"/></p>
+                        <p><field name="q4b"/><label for="q4b"/></p>
+                        <p><field name="q4c"/><label for="q4c"/></p>
+                        <p><field name="q4d"/><label for="q4d"/></p>
+                        <p><field name="q4e"/><label for="q4e"/></p>
+                        <p><field name="q4f"/><label for="q4f"/></p>
+                        <p><field name="q4g"/><label for="q4g"/></p>
+                        <p><field name="q4h"/><label for="q4h"/></p>
+                        <p><field name="q4i"/><label for="q4i"/></p>
+                        <p><field name="q4j"/><label for="q4j"/></p>
+                        <p><field name="q4k"/><label for="q4k"/></p>
+                        <p><field name="q4l"/><label for="q4l"/></p>
+                        <p><label for="q4_date"/><field name="q4_date"/></p>
+
+                        <p><label for="q2"/><br/><field name="q2" widget="radio" options="{'horizontal': true}"/></p>
+                        <p><field name="q2a"/><label for="q2a"/></p>
+                        <p><field name="q2b"/><label for="q2b"/></p>
+                        <p><field name="q2c"/><label for="q2c"/></p>
+
+                        <p><label for="q3"/><br/><field name="q3" widget="radio" options="{'horizontal': true}"/></p>
+                        <p><label for="q3a"/><field name="q3a" class="oe_inline"/></p>
+                        <p><label for="q3b"/><field name="q3b" class="oe_inline"/></p>
+
+                        <p><label for="q5"/><br/><field name="q5" widget="radio" options="{'horizontal': true}"/></p>
+                        <p><label for="q5a"/><field name="q5a" class="oe_inline"/></p>
+
+
+                        <p><b>Ud. ¿Padece o padeció alguna de las siguientes enfermedades o condiciones?</b></p>
+                        <p><label for="q1a"/><br/><field name="q1a" widget="radio"/></p>
+                        <p><label for="q1b"/><br/><field name="q1b" widget="radio"/></p>
+                        <p><label for="q1c"/><br/><field name="q1c" widget="radio"/></p>
+                        <p><label for="q1d"/><br/><field name="q1d" widget="radio"/></p>
+                        <p><label for="q1e"/><br/><field name="q1e" widget="radio"/></p>
+                        <p><label for="q1f"/><br/><field name="q1f" widget="radio"/></p>
+                        <p><label for="q1g"/><br/><field name="q1g" widget="radio"/></p>
+                        <p><label for="q1h"/><br/><field name="q1h" widget="radio"/></p>
+                        <p><label for="q1i"/><br/><field name="q1i" widget="radio"/></p>
+                        <p><label for="q1j"/><br/><field name="q1j" widget="radio"/></p>
+                        <p><label for="q1k"/><br/><field name="q1k" widget="radio"/></p>
+                        <p><label for="q1l"/><br/><field name="q1l" widget="radio"/></p>
+                        <p><label for="q1m"/><br/><field name="q1l" widget="radio"/></p>
+                        <p><label for="q1ma"/><field name="q1ma"/></p>
+
+                        <p><b>En la casa donde habita tiene los siguientes grupos de riesgo:</b></p>
+                        <p><field name="q6a"/><label for="q6a"/></p>
+                        <p><field name="q6b"/><label for="q6b"/></p>
+                        <p><field name="q6c"/><label for="q6c"/></p>
+                        <p><field name="q6d"/><label for="q6d"/></p>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_covid_fs_form" model="ir.ui.view">
+        <field name="name">covid.fs.form</field>
+        <field name="model">covid.fs</field>
+        <field name="arch" type="xml">
+            <form string="Ficha sintomátologica">
+                <sheet>
+                    <style>
+                        .djpage * {font-size: 1.11em;}
+                        .djpage input {font-size: .9em}
+                    </style>
+                    <div class="djpage">
+                        <h1>Ficha sintomatológica</h1>
+                        <h2>Ministerio de Salud - Resolución Ministerial Nro. 239-2020-MINSA</h2>
+
+                        <div style="border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;">
+                            <p>
+                                He recibido explicación del objetivo de esta evaluación y me comprometo a responder con la verdad.
+                            </p>
+                            <p>
+                                Todos los datos expresados en esta ficha constituyen declaración jurada de mi parte.
+                            </p>
+                            <p>
+                                He sido informado que de omitir o falsear información puedo perjudicar la salud de mis compañeros y la mía propia, lo cual de constituir una falta grave a la salud, asumo sus consecuencias.
+                            </p>
+                        </div>
+
+                        <div groups="hr.group_hr_user">
+                            <p>
+                                <label for="user_id" groups="hr.group_hr_user"/><br/>
+                                <field name="user_id" class="user"/>
+                            </p>
+                            <p>
+                                <label for="date"/><br/>
+                                <field name="date" class="user"/>
+                            </p>
+                        </div>
+
+                        <p>
+                            <b>En los últimos 14 días calendarios ha tenido alguno de los síntomas siguientes:</b>
+                        </p>
+
+                        <p><label for="q1"/><br/><field name="q1" widget="radio"/></p>
+                        <p><label for="q2"/><br/><field name="q2" widget="radio"/></p>
+                        <p><label for="q3"/><br/><field name="q3" widget="radio"/></p>
+                        <p><label for="q4"/><br/><field name="q4" widget="radio"/></p>
+                        <p><label for="q6"/><br/><field name="q6" widget="radio"/></p>
+                        <p><label for="q7"/><br/><field name="q7" widget="radio"/></p>
+                        <p><label for="q5"/><br/><field name="q5" widget="radio"/></p>
+                        <p><label for="q5a"/><br/><field name="q5a"/></p>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_covid_temp_form" model="ir.ui.view">
+        <field name="name">covid.temp.form</field>
+        <field name="model">covid.temp</field>
+        <field name="arch" type="xml">
+            <form string="Temperatura">
+                <sheet>
+                    <group>
+                        <field name="user_id" groups="hr.group_hr_user"/>
+                        <field name="datetime"/>
+                        <field name="temp"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_covid_imc_form" model="ir.ui.view">
+        <field name="name">covid.imc.form</field>
+        <field name="model">covid.imc</field>
+        <field name="arch" type="xml">
+            <form string="Registro IMC">
+                <sheet>
+                    <group>
+                        <field name="user_id" groups="hr.group_hr_user"/>
+                        <field name="date"/>
+                        <field name="weight"/>
+                        <field name="height"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_employee_covid" model="ir.ui.view">
+        <field name="name">hr.employee.covid</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <field name="covid_enabled" invisible="1"/>
+                    <button string="Inhabilitar" type="object" name="covid_e" class="oe_highlight" attrs="{'invisible': [('covid_enabled','=', True)]}" groups="hr.group_hr_user" />
+                    <button string="Habilitar" type="object" name="covid_d" class="oe_highlight" attrs="{'invisible': [('covid_enabled','=', False)]}" groups="hr.group_hr_user"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report id="report_stock_picking_action"
+                string="Guia de Remision"
+                model="stock.picking"
+                report_type="qweb-html"
+                name="decor_sanblas.report_stock_picking_template"
+        />
+        <template id="report_stock_picking_template">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <link rel="stylesheet" href="/decor_sanblas/static/src/css/estilos_reporte.css"/>
+                    <div id='page' class="page"
+                         style="height:300mm;margin: 0 -15px 0 -15px;">
+                        <style>
+                            p{
+                            padding:0;
+                            margin:0;
+                            }
+                        </style>
+                        <div class="text-center" style="margin-left: 12.9cm;">
+                            <p t-esc="o.name"/>
+                        </div>
+                        <div style="margin-top:4mm;">
+                            <p style="margin-left:25mm;" t-esc="o.partner_id.name"/>
+                        </div>
+                        <div style="position:relative;display: inline-block;">
+                            <p style="margin-left:25mm;">
+                                <t t-esc="time.strftime('%A, %d %B %Y',time.strptime(o.min_date,'%Y-%m-%d %H:%M:%S'))"/>
+                            </p>
+                            <p style="position:absolute;left:75mm;top:0;"
+                               t-esc="o.partner_id.vat"/>
+                            <p style="position:absolute;left:140mm;top:0"/>
+                            <p style="position:absolute;left:194mm;top:0;width:4cm">
+                                <t t-esc="o.cliente_oc"/>
+                            </p>
+                        </div>
+                        <div style="margin-top: 9mm">
+                            <p style="margin-left: 30mm">
+                                <t t-esc="o.picking_type_id.warehouse_id.partner_id.street"/>
+                                <t t-esc="o.picking_type_id.warehouse_id.partner_id.district_id.name"/>
+                                <t t-esc="o.picking_type_id.warehouse_id.partner_id.province_id.name"/>
+                            </p>
+                            <p style="margin-left: 30mm">
+                                <t t-esc="o.partner_id.street"/>
+                                <t t-esc="o.partner_id.district_id.name"/>
+                                <t t-esc="o.partner_id.province_id.name"/>
+                            </p>
+                        </div>
+                        <div style="margin-top:12mm">
+                            <t t-set="peso_total" t-value="0"/>
+                            <t t-set="cantidad_total" t-value="0"/>
+                            <div t-foreach="o.pack_operation_product_ids"
+                                 t-as="i">
+                                <p style="font-size:8pt;margin-left: 4mm; width: 35mm ;display:inline-block">
+                                    <t t-esc="i.product_id.default_code"/>
+                                </p>
+                                <p style="margin-left: 1mm; width: 120mm ;display:inline-block"
+                                   t-esc="i.product_id.name"/>
+                                <p style="margin-left: 1mm; width: 30mm ;display:inline-block"
+                                   t-esc="i.ordered_qty"/>
+                                <t t-set="cantidad_total" t-value="i.ordered_qty + cantidad_total"/>
+                                <p style="margin-left: 1mm; width: 10mm ;display:inline-block"
+                                   t-esc="i.product_id.uom_id.name"/>
+                                <p style="margin-left: 5mm; width: 10mm ;display:inline-block"
+                                   t-esc="i.product_id.peso * i.ordered_qty"/>
+                                <t t-set="peso_total" t-value="i.product_id.peso * i.ordered_qty + peso_total"/>
+                            </div>
+                            <div style="width:10cm;margin-left:14.5cm">
+                                <div style="height:1px;background-color:black"/>
+                                <p style="width:1.7cm;display:inline-block">
+                                    Total
+                                </p>
+                                <p style="display:inline-block;width:3.2cm">
+                                    <t t-esc="cantidad_total"/>
+                                </p>
+                                <p style="margin-left:1.5cm;display:inline-block;width:3cm">
+                                    <t t-esc="peso_total"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div style="position:absolute;top:25.82cm;width:100%">
+                            <p style="margin-left:45mm">
+                                <t t-esc="o.motivo_traslado"/>
+                            </p>
+                            <div style="margin-top:28mm;width:100%;position:relative;font-size:8pt">
+                                <div style="width:11.5cm;position:absolute">
+                                    <p style="margin-left:2cm;">
+                                        <t t-esc="o.transportista.vat"/>
+                                    </p>
+                                    <p style="margin-left:3cm;margin-top:4mm">
+                                        <t t-esc="o.transportista.name"/>
+                                    </p>
+                                </div>
+                                <div style="margin-left:13cm;width:4cm;position:absolute">
+                                    <p style="margin-left:1.2cm">
+                                        <t t-esc="o.transporte_marca"/>
+                                    </p>
+                                    <p style="margin-left:1.2cm">
+                                        <t t-esc="o.transporte_placa"/>
+                                    </p>
+                                    <p style="margin-left:3cm">
+                                        <t t-esc="o.transporte_licencia"/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

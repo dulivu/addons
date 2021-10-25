@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report id="report_account_invoice_action"
+                string="Factura decor"
+                model="account.invoice"
+                report_type="qweb-pdf"
+                name="decor_sanblas.report_account_invoice_template"
+        />
+        <template id="report_account_invoice_template">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div id='page' class="page"
+                         style="position: relative;height:288mm;">
+                        <style type="text/css">
+                            <![CDATA[
+/* Arvo */
+@font-face {
+  font-family: 'mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('monospace');
+}
+]]>
+                            p{
+                            font-family: 'mono';
+                            }
+                        </style>
+                        <div class="row">
+                            <div class="col-xs-12" style="padding-left:10mm">
+                                <p t-field="o.partner_id"/>
+                            </div>
+                            <div class="col-xs-4" style="padding-left:10mm">
+                                <p t-field="o.partner_id.vat"/>
+                            </div>
+                            <div class="col-xs-4">
+
+                            </div>
+                            <div class="text-center col-xs-4">
+                                <p t-field="o.date_invoice"/>
+                            </div>
+                            <div class="col-xs-4" style="padding-left:10mm">
+                                <p t-field="o.partner_id.street"/>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:8mm;">
+                            <div class="row" t-foreach="o.invoice_line_ids" t-as="l">
+                                <div class="col-xs-1">
+                                    <p t-esc="l.quantity"/>
+                                </div>
+                                <div class="col-xs-1" style="padding-left:5px;padding-right:30px">
+                                    <p t-field="l.uom_id" groups="product.group_uom"/>
+                                </div>
+                                <div class="col-xs-6">
+                                    <p t-field="l.name"/>
+                                </div>
+                                <div class="col-xs-1 text-right">
+                                    <p t-field="l.price_unit"/>
+                                </div>
+                                <div class="col-xs-1">
+
+                                </div>
+                                <div class="col-xs-2 text-center">
+                                    <p t-esc="l.price_subtotal"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12" style="position:absolute; bottom:0px;">
+                            <div class="row">
+                                <div class="col-xs-12" style="margin-bottom:11mm">
+                                    <p id="total-texto"/>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-2 col-xs-offset-2">
+
+                                        </div>
+                                        <div class="col-xs-2">
+
+                                        </div>
+                                        <div class="col-xs-2 text-center;">
+                                            <p t-esc="o.amount_untaxed"/>
+                                        </div>
+                                        <div class="col-xs-2 text-center">
+                                            <p t-esc="o.amount_tax"/>
+                                        </div>
+                                        <div class="col-xs-2 text-center">
+                                            <p t-field="o.amount_total"/>
+                                            <p id="monto-total" t-esc="o.amount_total" style="display:none"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript" src="/decor_sanblas/static/src/js/number_to_text.js"></script>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

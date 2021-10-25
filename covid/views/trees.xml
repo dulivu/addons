@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="views_covid_dj_tree" model="ir.ui.view">
+        <field name="name">covid.dj.tree</field>
+        <field name="model">covid.dj</field>
+        <field name="arch" type="xml">
+            <tree string="Declaraciones Juradas">
+                <field name="user_id"/>
+
+                <field name="date" string="Fecha"/>
+                <field name="create_uid" string="Creado por"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="views_covid_fs_tree" model="ir.ui.view">
+        <field name="name">covid.fs.tree</field>
+        <field name="model">covid.fs</field>
+        <field name="arch" type="xml">
+            <tree string="Fichas sintomatologícas">
+                <field name="user_id"/>
+                <field name="date" string="Fecha"/>
+                <field name="create_uid" string="Creado por"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_covid_temp" model="ir.ui.view">
+        <field name="name">covid.temp.tree</field>
+        <field name="model">covid.temp</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="user_id"/>
+                <field name="datetime"/>
+                <field name="temp"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_covid_imc" model="ir.ui.view">
+        <field name="name">covid.imc.tree</field>
+        <field name="model">covid.imc</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="user_id"/>
+                <field name="date"/>
+                <field name="weight"/>
+                <field name="height"/>
+                <field name="imc"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

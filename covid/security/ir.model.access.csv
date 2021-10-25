@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+covid_fs,covid_fs,model_covid_fs,base.group_user,1,0,1,0
+covid_dj,covid_dj,model_covid_dj,base.group_user,1,0,1,0
+covid_temp,covid_temp,model_covid_temp,base.group_user,1,0,1,0
+covid_imc,covid_imc,model_covid_imc,base.group_user,1,0,1,0
+covid_hr_fs,covid_fs,model_covid_fs,hr.group_hr_user,1,0,1,1
+covid_hr_dj,covid_dj,model_covid_dj,hr.group_hr_user,1,0,1,1
+covid_hr_temp,covid_temp,model_covid_temp,hr.group_hr_user,1,0,1,1
+covid_hr_imc,covid_imc,model_covid_imc,hr.group_hr_user,1,0,1,1
+

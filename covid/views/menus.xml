@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_covid_dj" model="ir.actions.act_window">
+        <field name="name">Declaración Jurada</field>
+        <field name="res_model">covid.dj</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{
+            'search_default_my_djs': 1,
+            'default_user_id': uid,
+        }</field>
+    </record>
+
+    <record id="action_covid_fs" model="ir.actions.act_window">
+        <field name="name">Fichas Sintomatológicas</field>
+        <field name="res_model">covid.fs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{
+            'search_default_my_fss': 1,
+            'default_user_id': uid,
+        }</field>
+    </record>
+
+    <record id="action_covid_temp" model="ir.actions.act_window">
+        <field name="name">Temperaturas</field>
+        <field name="res_model">covid.temp</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{
+            'search_default_my_temps': 1,
+            'default_user_id': uid,
+        }</field>
+    </record>
+
+    <record id="action_covid_imc" model="ir.actions.act_window">
+        <field name="name">Registro IMC</field>
+        <field name="res_model">covid.imc</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{
+            'search_default_my_imcs': 1,
+            'default_user_id': uid,
+        }</field>
+    </record>
+
+    <menuitem id="menu_covid_main" name="Covid" parent="hr.menu_hr_root"/>
+
+    <menuitem id="menu_covid_dj" name="Declaración Jurada" action="action_covid_dj" parent="menu_covid_main" groups="base.group_user"/>
+    <menuitem id="menu_covid_fs" name="Ficha Sintomatológica" action="action_covid_fs" parent="menu_covid_main" groups="base.group_user"/>
+    <menuitem id="menu_covid_temp" name="Temperaturas" action="action_covid_temp" parent="menu_covid_main" groups="base.group_user"/>
+    <menuitem id="menu_covid_imc" name="Registro IMC" action="action_covid_imc" parent="menu_covid_main" groups="base.group_user"/>
+</odoo>

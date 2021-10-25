@@ -1,0 +1,384 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="report_covid_dj">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="report.external_layout">
+                    <div class="page">
+                        <style>
+                            p.block { border-top: 1px solid #ccc; }
+                            div { font-size: .88em; }
+                        </style>
+                        <h3 style="text-align: center;">DECLARACION JURADA/SINTOMATOLOGIA Y ANTECEDENTES PERSONALES COVID-19</h3>
+
+                        <p class="block">
+                            Datos generales: <br/><br/>
+
+                            Tipo de documento: <b t-field="o.doc_type"></b>, Número de documento: <b t-field="o.doc_num"></b>,
+                            Edad: <b t-field="o.age"></b>, Sexo: <b t-field="o.gender"></b>,
+                            Puesto de trabajo <b t-field="o.work"></b>, Empleador: <b t-field="o.employeer"></b>,
+                            Nombres y Apellidos: <b t-field="o.user_id"></b>, Nacionalidad <b t-field="o.country"></b>,
+                            Departamento de residencia: <b t-field="o.departamento"></b>, Provincia de residencia: <b t-field="o.provincia"></b>,
+                            Distrito de residencia: <b t-field="o.distrito"></b>, Dirección actual de residencia: <b t-field="o.direc"></b>,
+                            Correo electrónico: <b t-field="o.email"></b>, Celular: <b t-field="o.cel"></b>, Teléfono fijo <b t-field="o.phone"></b>,
+                            Datos de algún familiar de contacto: <b t-field="o.familiar"></b>, Celular: <b t-field="o.familiar_cel"></b>,
+                            Tipo de trabajo: <b t-field="o.familiar_work"></b>, Actividad economica: <b>Industria</b>
+                        </p>
+
+                        <h4>Preguntas de evaluación</h4>
+
+                        <p class="block">
+                            1. ¿Que síntomas presenta? Marque con una X
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q4a is True">X</span>
+                                <span>)</span>
+                                <span>Fiebre</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q4b is True">X</span>
+                                <span>)</span>
+                                <span>Dificultad para respirar (Disnea)</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q4c is True">X</span>
+                                <span>)</span>
+                                <span>Tos seca o productiva</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q4d is True">X</span>
+                                <span>)</span>
+                                <span>Dolor de garganta</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q4e is True">X</span>
+                                <span>)</span>
+                                <span>Congestión nasal</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q4f is True">X</span>
+                                <span>)</span>
+                                <span>Fatiga</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q4g is True">X</span>
+                                <span>)</span>
+                                <span>Dolor de musculos y/o articulaciones</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q4h is True">X</span>
+                                <span>)</span>
+                                <span>Dolor de cabeza</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q4i is True">X</span>
+                                <span>)</span>
+                                <span>Escalosfríos</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q4j is True">X</span>
+                                <span>)</span>
+                                <span>Nauseas o vómitos</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q4k is True">X</span>
+                                <span>)</span>
+                                <span>Diarrea</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q4l is True">X</span>
+                                <span>)</span>
+                                <span>Ninguno</span>
+                            </div>
+                            <div>
+                                Fecha de inicio de los sintomas:
+                                <span t-field="o.q4_date"></span>
+                            </div>
+                        </p>
+
+                        <p class="block">
+                            2. ¿En los últimos 14 días ha tenido contacto con personas con diagnóstico confirmado de Coronavirus?
+                            <div>
+                                (<span t-if="o.q2 == 'si'">X</span>) SI
+                                (<span t-if="o.q2 == 'no'">X</span>) NO
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q2a is True">X</span>
+                                <span>)</span>
+                                <span>Entorno familiar</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q2b is True">X</span>
+                                <span>)</span>
+                                <span>Entorno laboral</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q2c is True">X</span>
+                                <span>)</span>
+                                <span>Entorno de salud</span>
+                            </div>
+                        </p>
+
+                        <p class="block">
+                            3. ¿Ha viajado fuera del país o zonas de Perú con casos confirmados de COVID-19. En los últimos 14 días?
+                            <div>
+                                (<span t-if="o.q3 == 'si'">X</span>) SI
+                                (<span t-if="o.q3 == 'no'">X</span>) NO
+                            </div>
+                            <div>
+                                <span>País que ha vsitado: </span><span t-field="o.q3a"></span>
+                            </div>
+                            <div>
+                                <span>Fecha de retorno al país: </span><span t-field="o.q3b"></span>
+                            </div>
+                        </p>
+
+                        <p class="block">
+                            4. ¿En los últimos 14 días se desplazó a diferentes distritos, distintos a su lugar de residencia?
+                            <div>
+                                (<span t-if="o.q5 == 'si'">X</span>) SI
+                                (<span t-if="o.q5 == 'no'">X</span>) NO
+                            </div>
+                            <div>
+                                <span>¿Qué distritos visitó?: </span><span t-field="o.q5a"></span>
+                            </div>
+                        </p>
+
+                        <p class="block">
+                            5. Ud. ¿Padece o padeció alguna de las siguientes enfermedades o condiciones?
+                            <div>
+                                (<span t-if="o.q1a == 'si'">X</span>)
+                                <span>Obesidad</span>
+                            </div>
+                            <div>
+                                (<span t-if="o.q1b == 'si'">X</span>)
+                                <span>Enfermedad pulmonar crónica</span>
+                            </div>
+                            <div>
+                                (<span t-if="o.q1c == 'si'">X</span>)
+                                <span>Diabetes</span>
+                            </div>
+                            <div>
+                                (<span t-if="o.q1d == 'si'">X</span>)
+                                <span>Hipertensión arterial</span>
+                            </div>
+                            <div>
+                                (<span t-if="o.q1e == 'si'">X</span>)
+                                <span>Embarazo/puerperio</span>
+                            </div>
+                            <div>
+                                (<span t-if="o.q1f == 'si'">X</span>)
+                                <span>Mayor de 60 años</span>
+                            </div>
+                            <div>
+                                (<span t-if="o.q1g == 'si'">X</span>)
+                                <span>Insuficiencia renal crónica</span>
+                            </div>
+                            <div>
+                                (<span t-if="o.q1h == 'si'">X</span>)
+                                <span>Enfermedades cardiovasculares</span>
+                            </div>
+                            <div>
+                                (<span t-if="o.q1i == 'si'">X</span>)
+                                <span>Asma</span>
+                            </div>
+                            <div>
+                                (<span t-if="o.q1j == 'si'">X</span>)
+                                <span>Enfermedad o tratamiento inmunosupresor</span>
+                            </div>
+                            <div>
+                                (<span t-if="o.q1k == 'si'">X</span>)
+                                <span>Cáncer</span>
+                            </div>
+                            <div>
+                                (<span t-if="o.q1l == 'si'">X</span>)
+                                <span>Personal de salud</span>
+                            </div>
+                            <div>
+                                (<span t-if="o.q1m == 'si'">X</span>)
+                                <span>Otros</span>
+                            </div>
+                            <div>
+                                <span>Especificar: </span>
+                                <span t-field="o.q1ma"></span>
+                            </div>
+                        </p>
+
+                        <p class="block">
+                            6.	En la casa donde habita tiene los siguientes grupos de riesgo:
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q6a is True">X</span>
+                                <span>)</span>
+                                <span>Adulto mayor</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q6a is True">X</span>
+                                <span>)</span>
+                                <span>Niño</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q6a is True">X</span>
+                                <span>)</span>
+                                <span>Gestante</span>
+                            </div>
+                            <div>
+                                <span>(</span>
+                                <span t-if="o.q6a is True">X</span>
+                                <span>)</span>
+                                <span>Familiar con enfermedad crónica</span>
+                            </div>
+                        </p>
+
+                        <p class="block">
+                            DECLARO BAJO JURAMENTO QUE LOS DATOS SEÑALADOS, EXPRESAN LA VERDAD. Y de acuerdo a la Ley General de Salud doy consentimiento para que la información brindada
+                            sea usada para la vigilancia epidemiologica COVID-19.
+                        </p>
+
+                        <p>
+                            Nombres y Apellidos: <b t-field="o.user_id"></b>
+                        </p>
+
+                        <p>
+                            <span>DNI: </span><b t-field="o.doc_num"></b>
+                        </p>
+                        <p>
+                            <span>Fecha: </span><b t-field="o.date"></b>
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <report id="covid_dj_format"
+            model="covid.dj"
+            string="Formato impreso"
+            report_type="qweb-pdf"
+            name="covid.report_covid_dj"
+            file="covid.report_covid_dj"/>
+
+
+    <template id="report_covid_fs">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="report.external_layout">
+                    <div class="page">
+                        <h3 style="text-align: center; border: 1px solid #000; margin-bottom: 0; border-bottom: none;">
+                            Ficha sintamatológica COVID-19<br/>
+                            Para Regreso al trabajo<br/>
+                            Declaracion Jurada<br/>
+                        </h3>
+
+                        <div style="border: 1px solid #000; margin-top: 0; padding-top: 1em; padding-bottom: 5em;">
+                            He recibido explicación del objetivo de esta evaluación y me comprometo a responder con la verdad.
+
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td>Empresa o Entidad Pública:</td>
+                                    <td><span t-field="o.user_id.employee_ids[0].company_id"></span></td>
+                                    <td>RUC:</td>
+                                    <td><span t-field="o.user_id.employee_ids[0].company_id.vat"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Apellidos y nombres:</td>
+                                    <td colspan="3"><span t-field="o.user_id.name"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Área de trabajo:</td>
+                                    <td><span t-field="o.user_id.employee_ids[0].department_id"></span></td>
+                                    <td>Doc.:</td>
+                                    <td><span t-field="o.user_id.employee_ids[0].identification_id"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Dirección:</td>
+                                    <td><span t-field="o.user_id.employee_ids[0].address_home_id"></span></td>
+                                    <td>Número (celular):</td>
+                                    <td><span t-field="o.user_id.mobile"></span></td>
+                                </tr>
+                            </table>
+
+                            <p style="margin-top: 1em;">
+                                En los últimos 14 días calendario ha tenido algunos de los síntomas siguientes:
+                            </p>
+
+                            <table style="width: 70%;">
+                                <tr>
+                                    <td></td>
+                                    <td style="border: 1px solid #000; width: 15%;">SI</td>
+                                    <td style="border: 1px solid #000; width: 15%;">NO</td>
+                                </tr>
+                                <tr>
+                                    <td>1. Sensación de alza térmica o fiebre</td>
+                                    <td style="border: 1px solid #000;"><span t-if="o.q1 == 'si'">X</span></td>
+                                    <td style="border: 1px solid #000;"><span t-if="o.q1 == 'no'">X</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>2. Tos, estornudos o dificultad para respirar</td>
+                                    <td style="border: 1px solid #000;"><span t-if="o.q2 == 'si'">X</span></td>
+                                    <td style="border: 1px solid #000;"><span t-if="o.q2 == 'no'">X</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>3. Expectoración o flema amarilla verdosa</td>
+                                    <td style="border: 1px solid #000;"><span t-if="o.q3 == 'si'">X</span></td>
+                                    <td style="border: 1px solid #000;"><span t-if="o.q3 == 'no'">X</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>4. Contacto con persona(s) con un caso confirmado de COVID-19</td>
+                                    <td style="border: 1px solid #000;"><span t-if="o.q4 == 'si'">X</span></td>
+                                    <td style="border: 1px solid #000;"><span t-if="o.q4 == 'no'">X</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>5. Está tomando alguna medicación</td>
+                                    <td style="border: 1px solid #000;"><span t-if="o.q5 == 'si'">X</span></td>
+                                    <td style="border: 1px solid #000;"><span t-if="o.q5 == 'no'">X</span></td>
+                                </tr>
+                            </table>
+
+                            <div style="margin-top: 1.5em;">
+                                <p>
+                                    Todos los datos expresados en esta ficha constituyen declaración jurada de mi parte.
+                                </p>
+                                <p>
+                                    He sido informado que de omitir o falsear información puedo perjudicar la salud de mis compañeros y la mía propia, lo cual de constituir una falta grave a la salud, asumo sus consecuencias.
+                                </p>
+                            </div>
+
+                            <p style="margin-top: 3em;">
+                                <b>Fecha: <span t-field="o.date"></span></b>
+                            </p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <report id="covid_fs_format"
+            model="covid.fs"
+            string="Formato impreso"
+            report_type="qweb-pdf"
+            name="covid.report_covid_fs"
+            paperformat="hr_holidays.paperformat_hrsummary"
+            file="covid.report_covid_fs"/>
+</odoo>

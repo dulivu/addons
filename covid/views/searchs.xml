@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_covid_dj_search" model="ir.ui.view">
+        <field name="name">covid.dj.search</field>
+        <field name="model">covid.dj</field>
+        <field name="arch" type="xml">
+            <search string="DJ Filtros">
+                <field name="user_id" string="Empleado"/>
+                <filter string="Mis declaraciones" name="my_djs" domain="[('user_id', '=', uid)]"/>
+                <group expand="0" string="Group by">
+                    <filter name="group_employee" string="Empleado" context="{'group_by': 'user_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_covid_fs_search" model="ir.ui.view">
+        <field name="name">covid.fs.search</field>
+        <field name="model">covid.fs</field>
+        <field name="arch" type="xml">
+            <search string="FS Filtros">
+                <field name="user_id" string="Empleado"/>
+                <filter string="Mis fichas" name="my_fss" domain="[('user_id', '=', uid)]"/>
+                <group expand="0" string="Group by">
+                    <filter name="group_employee" string="Empleado" context="{'group_by': 'user_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_covid_temp_search" model="ir.ui.view">
+        <field name="name">covid.temp.search</field>
+        <field name="model">covid.temp</field>
+        <field name="arch" type="xml">
+            <search string="Temp Filtros">
+                <field name="user_id" string="Empleado"/>
+                <filter string="Mis temperaturas" name="my_temps" domain="[('user_id', '=', uid)]"/>
+                <group expand="0" string="Group by">
+                    <filter name="group_employee" string="Empleado" context="{'group_by': 'user_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_covid_imc_search" model="ir.ui.view">
+        <field name="name">covid.imc.search</field>
+        <field name="model">covid.imc</field>
+        <field name="arch" type="xml">
+            <search string="IMC filtros">
+                <field name="user_id" string="Empleado"/>
+                <filter string="Mis registros" name="my_imcs" domain="[('user_id', '=', uid)]"/>
+                <group expand="0" string="Group by">
+                    <filter name="group_employee" string="Empleado" context="{'group_by': 'user_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>
